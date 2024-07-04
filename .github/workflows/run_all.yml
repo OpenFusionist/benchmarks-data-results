@@ -8,15 +8,15 @@ on:
         required: true
         default: "/root/benchmarks/"
       date:
-        description: "Enter a specific date (optional, format: YYYYMMDD, e.g. 20240101)"
+        description: "Enter a date (optional, e.g. 20240101)"
         required: false
         default: ""
       clients:
-        description: 'Enter clients to use (JSON array format, e.g., ["nethermind","geth","reth","erigon","besu"])'
+        description: 'Enter clients to use (e.g., [nethermind,geth,reth,erigon,besu])'
         required: true
-        default: '["nethermind","geth","reth","erigon","besu"]'
+        default: '[nethermind,geth,reth,erigon,besu]'
       sizes:
-        description: "Enter sizes (JSON array format, e.g., [1,10,100,500,1000])"
+        description: "Enter sizes (e.g., [1,10,100,500,1000])"
         required: false
         default: "[1,10,100,500,1000]"
       repetitions:
@@ -37,6 +37,10 @@ jobs:
       REPETITIONS: ${{ github.event.inputs.repetitions || 8 }}
     outputs:
       date: ${{ steps.set-date.outputs.date }}
+      root_dir: ${{ steps.set-date.outputs.root_dir }}
+      clients: ${{ steps.set-date.outputs.clients }}
+      sizes: ${{ steps.set-date.outputs.sizes }}
+      repetitions: ${{ steps.set-date.outputs.repetitions }}
     steps:
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
@@ -50,9 +54,11 @@ jobs:
           else
             DATE=${{ env.DATE }}
           fi
-          echo "DATE=${DATE}"
-          echo "DATE=$DATE" >> $GITHUB_ENV
-          echo "DATE=$DATE" >> $GITHUB_OUTPUT
+          echo "date=${DATE}" >> $GITHUB_OUTPUT
+          echo "root_dir=${{ env.ROOT_DIR }}" >> $GITHUB_OUTPUT
+          echo "clients=${{ env.CLIENTS }}" >> $GITHUB_OUTPUT
+          echo "sizes=${{ env.SIZES }}" >> $GITHUB_OUTPUT
+          echo "repetitions=${{ env.REPETITIONS }}" >> $GITHUB_OUTPUT
       - name: Clone benchmarks repos
         run: |
           BRANCH_BENCHMARKS_DATA_RESULT=main
@@ -64,7 +70,7 @@ jobs:
             set +e
             mkdir -p "${{ env.ROOT_DIR }}"
             cd "${{ env.ROOT_DIR }}"
-            git clone -b $BRANCH_BENCHMARKS_DATA_RESULT https://${{ secrets.GIT_TOEKN_PREFIX }}github.com/OpenFusionist/benchmarks-data-result.git benchmarks-data-result
+            git clone -b $BRANCH_BENCHMARKS_DATA_RESULT https://${{ secrets.GIT_TOEKN_PREFIX }}github.com/OpenFusionist/benchmarks-data-demo.git benchmarks-data-result
             git clone -b $BRANCH_GAS_BENCHMARKS https://github.com/OpenFusionist/gas-benchmarks.git gas-benchmarks
             git clone -b $BRANCH_BURNTPIX_BENCHMARKS https://github.com/OpenFusionist/gas-benchmarks.git burntpix-benchmarks
             git clone -b $BRANCH_GENESIS_INIT_BENCHMARKS https://github.com/OpenFusionist/genesis-init-benchmarks.git genesis-init-benchmarks
@@ -96,6 +102,10 @@ jobs:
     outputs:
       matrix: ${{ steps.generate-matrix.outputs.matrix }}
       date: ${{ needs.setup-environment.outputs.date }}
+      root_dir: ${{ needs.setup-environment.outputs.root_dir }}
+      clients: ${{ needs.setup-environment.outputs.clients }}
+      sizes: ${{ needs.setup-environment.outputs.sizes }}
+      repetitions: ${{ needs.setup-environment.outputs.repetitions }}
     steps:
       - name: Check Date
         id: check-date
@@ -108,23 +118,30 @@ jobs:
       - name: Generate Matrix
         id: generate-matrix
         run: |
-          CLIENTS='${{ github.event.inputs.clients }}'
-          SIZES='${{ github.event.inputs.sizes }}'
+          CLIENTS='${{ needs.setup-environment.outputs.clients }}'
+          SIZES='${{ needs.setup-environment.outputs.sizes }}'
           echo "CLIENTS=${CLIENTS}"
           echo "SIZES=${SIZES}"
-          
-          MATRIX_CLIENTS=$(echo '{}' | jq -c --argjson clients "$CLIENTS" '.Client = $clients')
-          MATRIX=$(echo $MATRIX_CLIENTS | jq -c --argjson sizes "$SIZES" '.Size = $sizes')
-          
+
+          CLIENTS_JSON=$(echo "$CLIENTS" | sed 's/[][]//g' | jq -R 'split(",")')
+          SIZES_JSON=$(echo "$SIZES" | sed 's/[][]//g' | jq -R 'split(",") | map(tonumber)')
+
+          MATRIX_CLIENTS=$(echo '{}' | jq -c --argjson clients "$CLIENTS_JSON" '.Client = $clients')
+          MATRIX=$(echo $MATRIX_CLIENTS | jq -c --argjson sizes "$SIZES_JSON" '.Size = $sizes')
+
           echo "Updated MATRIX=${MATRIX}"
           echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
-
+          
   run-gas-benchmarks:
     runs-on: ubuntu-latest
     needs: generate-matrix
     outputs:
       matrix: ${{ needs.generate-matrix.outputs.matrix }}
       date: ${{ needs.generate-matrix.outputs.date }}
+      root_dir: ${{ needs.generate-matrix.outputs.root_dir }}
+      clients: ${{ needs.generate-matrix.outputs.clients }}
+      sizes: ${{ needs.generate-matrix.outputs.sizes }}
+      repetitions: ${{ needs.generate-matrix.outputs.repetitions }}
     strategy:
       max-parallel: 1
       matrix:
@@ -138,8 +155,8 @@ jobs:
       - name: Run benchmarks
         run: |
           CLIENT=${{ matrix.client }}
-          REPETITIONS=${{ github.event.inputs.repetitions }}
-          ROOT_DIR=${{ github.event.inputs.root_dir }}
+          REPETITIONS=${{ needs.generate-matrix.outputs.repetitions }}
+          ROOT_DIR=${{ needs.generate-matrix.outputs.root_dir }}
           DATE=${{ needs.generate-matrix.outputs.date }}
 
           ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=60 root@${{ secrets.REMOTE_IP }} << EOF
@@ -161,6 +178,10 @@ jobs:
     outputs:
       matrix: ${{ needs.run-gas-benchmarks.outputs.matrix }}
       date: ${{ needs.run-gas-benchmarks.outputs.date }}
+      root_dir: ${{ needs.run-gas-benchmarks.outputs.root_dir }}
+      clients: ${{ needs.run-gas-benchmarks.outputs.clients }}
+      sizes: ${{ needs.run-gas-benchmarks.outputs.sizes }}
+      repetitions: ${{ needs.run-gas-benchmarks.outputs.repetitions }}
     strategy:
       max-parallel: 1
       matrix: ${{ fromJson(needs.run-gas-benchmarks.outputs.matrix) }}
@@ -174,8 +195,8 @@ jobs:
         run: |
           CLIENT=${{ matrix.client }}
           SIZE=${{ matrix.size }}
-          REPETITIONS=${{ github.event.inputs.repetitions }}
-          ROOT_DIR=${{ github.event.inputs.root_dir }}
+          REPETITIONS=${{ needs.run-gas-benchmarks.outputs.repetitions }}
+          ROOT_DIR=${{ needs.run-gas-benchmarks.outputs.root_dir }}
           DATE=${{ needs.run-gas-benchmarks.outputs.date }}
 
           ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=60 root@${{ secrets.REMOTE_IP }} << EOF
@@ -197,6 +218,10 @@ jobs:
     outputs:
       matrix: ${{ needs.run-genesis-init-speed-benchmarks.outputs.matrix }}
       date: ${{ needs.run-genesis-init-speed-benchmarks.outputs.date }}
+      root_dir: ${{ needs.run-genesis-init-speed-benchmarks.outputs.root_dir }}
+      clients: ${{ needs.run-genesis-init-speed-benchmarks.outputs.clients }}
+      sizes: ${{ needs.run-genesis-init-speed-benchmarks.outputs.sizes }}
+      repetitions: ${{ needs.run-genesis-init-speed-benchmarks.outputs.repetitions }}
     strategy:
       max-parallel: 1
       matrix: ${{ fromJson(needs.run-genesis-init-speed-benchmarks.outputs.matrix) }}
@@ -208,10 +233,10 @@ jobs:
           ssh-private-key: ${{ secrets.PRIVKEY }}
       - name: Run genesis init memory benchmarks
         run: |
-          CLIENT=${{ matrix.client }}
-          SIZE=${{ matrix.size }}
-          REPETITIONS=${{ github.event.inputs.repetitions }}
-          ROOT_DIR=${{ github.event.inputs.root_dir }}
+          CLIENT=${{ needs.run-genesis-init-speed-benchmarks.outputs.clients }}
+          SIZE=${{ needs.run-genesis-init-speed-benchmarks.outputs.sizes }}
+          REPETITIONS=${{ needs.run-genesis-init-speed-benchmarks.outputs.repetitions }}
+          ROOT_DIR=${{ needs.run-genesis-init-speed-benchmarks.outputs.root_dir }}
           DATE=${{ needs.run-genesis-init-speed-benchmarks.outputs.date }}
 
           ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=60 root@${{ secrets.REMOTE_IP }} << EOF
@@ -233,6 +258,10 @@ jobs:
     outputs:
       matrix: ${{ needs.run-genesis-init-memory-benchmarks.outputs.matrix }}
       date: ${{ needs.run-genesis-init-memory-benchmarks.outputs.date }}
+      root_dir: ${{ needs.run-genesis-init-memory-benchmarks.outputs.root_dir }}
+      clients: ${{ needs.run-genesis-init-memory-benchmarks.outputs.clients }}
+      sizes: ${{ needs.run-genesis-init-memory-benchmarks.outputs.sizes }}
+      repetitions: ${{ needs.run-genesis-init-memory-benchmarks.outputs.repetitions }}
     strategy:
       max-parallel: 1
       matrix: ${{ fromJson(needs.run-genesis-init-memory-benchmarks.outputs.matrix) }}
@@ -246,8 +275,8 @@ jobs:
         run: |
           CLIENT=${{ matrix.client }}
           SIZE=${{ matrix.size }}
-          REPETITIONS=${{ github.event.inputs.repetitions }}
-          ROOT_DIR=${{ github.event.inputs.root_dir }}
+          REPETITIONS=${{ needs.run-genesis-init-memory-benchmarks.outputs.repetitions }}
+          ROOT_DIR=${{ needs.run-genesis-init-memory-benchmarks.outputs.root_dir }}
           DATE=${{ needs.run-genesis-init-memory-benchmarks.outputs.date }}
 
           ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=60 root@${{ secrets.REMOTE_IP }} << EOF
@@ -273,9 +302,11 @@ jobs:
           ssh-private-key: ${{ secrets.PRIVKEY }}
       - name: Push results
         run: |
+          ROOT_DIR=${{ needs.run-burntpix-benchmarks.outputs.root_dir }}
+
           ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=60 root@${{ secrets.REMOTE_IP }} << EOF
             set +e
-            cd "${{ github.event.inputs.root_dir }}/benchmarks-data-result"
+            cd "$ROOT_DIR/benchmarks-data-result"
             git status
             ./push.sh
             set -e
