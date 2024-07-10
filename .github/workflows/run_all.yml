@@ -164,6 +164,7 @@ jobs:
             echo "=== Run gas benchmarks for client: $CLIENT and date: $DATE ==="
             cd "$ROOT_DIR/gas-benchmarks"
             git pull
+            cp ../benchmarks-data-result/images.yaml .
             ./run.sh -t "tests/" -w "warmup/warmup-1000bl-16wi-24tx.txt" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE"
             python3 report_metadata.py "$DATE"
             cp "results-$DATE/reports/index.html" "../benchmarks-data-result/gas/$DATE.html"
@@ -204,6 +205,7 @@ jobs:
             echo "=== Run genesis init speed benchmarks for client: $CLIENT with size: $SIZE and date: $DATE ==="
             cd "$ROOT_DIR/genesis-init-benchmarks"
             git pull
+            cp ../benchmarks-data-result/images.yaml .
             ./runSpeed.sh -t "tests/" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE/speed" -s "$SIZE"
             python3 report_metadata.py "$DATE" speed
             cp "results-$DATE/speed/reports/speed.html" "../benchmarks-data-result/genesis-init-speed/$DATE.html"
@@ -244,6 +246,7 @@ jobs:
             echo "=== Run genesis init memory benchmarks for client: $CLIENT with size: $SIZE and date: $DATE ==="
             cd "$ROOT_DIR/genesis-init-benchmarks"
             git pull
+            cp ../benchmarks-data-result/images.yaml .
             ./runMemory.sh -t "tests/" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE/memory" -s "$SIZE"
             python3 report_metadata.py "$DATE" memory
             cp "results-$DATE/memory/reports/memory.html" "../benchmarks-data-result/genesis-init-memory/$DATE.html"
@@ -284,6 +287,7 @@ jobs:
             echo "=== Run burntpix benchmarks for client: $CLIENT with size: $SIZE and date: $DATE ==="
             cd "$ROOT_DIR/burntpix-benchmarks"
             git pull
+            cp ../benchmarks-data-result/images.yaml .
             ./run.sh -t "testburnt/" -w "./testburntwarm/warm.txt" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE"
             python3 report_metadata.py "$DATE"
             cp "results-$DATE/reports/index.html" "../benchmarks-data-result/burntpix/$DATE.html"
