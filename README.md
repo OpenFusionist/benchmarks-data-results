@@ -15,9 +15,11 @@ This repo's result data is reported by 4 benchmarks:
 
 Install these packages on your server:
 
-- pip
-- make
-- docker
+- Python 3.10
+- Docker
+- Docker Compose
+- .NET 8.0.x
+- `make` (for running make commands)
 
 ### 2. Fork this repo
 
