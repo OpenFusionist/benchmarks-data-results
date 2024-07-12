@@ -1,4 +1,4 @@
-## Run the benchmarks yourself
+## Description
 
 This repo's result data is reported by 4 benchmarks:
 
@@ -8,6 +8,10 @@ This repo's result data is reported by 4 benchmarks:
 | Genesis Init Speed | https://github.com/OpenFusionist/genesis-init-benchmarks |
 | Genesis Memory Speed | https://github.com/OpenFusionist/genesis-init-benchmarks |
 | Burntpix | https://github.com/OpenFusionist/gas-benchmarks/tree/burnt-rc-1 |
+
+## Update client version
+
+The config file of client version is [images.yaml](https://github.com/OpenFusionist/benchmarks-data-results/blob/main/images.yaml) , all benchmarks repo will use this config file when script running. If you want to upgrade the client version, just pull reuqestion for update this file in this repo.
 
 ## Run benchmarks yourself
 
