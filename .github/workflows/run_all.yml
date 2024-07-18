@@ -267,7 +267,8 @@ jobs:
       repetitions: ${{ needs.run-genesis-init-memory-benchmarks.outputs.repetitions }}
     strategy:
       max-parallel: 1
-      matrix: ${{ fromJson(needs.run-genesis-init-memory-benchmarks.outputs.matrix) }}
+      matrix:
+        client: ${{ fromJson(needs.run-genesis-init-memory-benchmarks.outputs.matrix).client }}
       fail-fast: false
     steps:
       - name: Setup SSH
@@ -277,14 +278,13 @@ jobs:
       - name: Run burntpix benchmarks
         run: |
           CLIENT=${{ matrix.client }}
-          SIZE=${{ matrix.size }}
           REPETITIONS=${{ needs.run-genesis-init-memory-benchmarks.outputs.repetitions }}
           ROOT_DIR=${{ needs.run-genesis-init-memory-benchmarks.outputs.root_dir }}
           DATE=${{ needs.run-genesis-init-memory-benchmarks.outputs.date }}
 
           ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=60 root@${{ secrets.REMOTE_IP }} << EOF
             set +e
-            echo "=== Run burntpix benchmarks for client: $CLIENT with size: $SIZE and date: $DATE ==="
+            echo "=== Run burntpix benchmarks for client: $CLIENT with date: $DATE ==="
             cd "$ROOT_DIR/burntpix-benchmarks"
             git pull
             cp ../benchmarks-data-result/images.yaml .
