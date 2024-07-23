@@ -256,11 +256,6 @@ jobs:
       clients: ${{ needs.run-genesis-init-memory-benchmarks.outputs.clients }}
       sizes: ${{ needs.run-genesis-init-memory-benchmarks.outputs.sizes }}
       repetitions: ${{ needs.run-genesis-init-memory-benchmarks.outputs.repetitions }}
-    strategy:
-      max-parallel: 8
-      matrix:
-        client: ${{ fromJson(needs.run-genesis-init-memory-benchmarks.outputs.matrix).Client }}
-      fail-fast: false
     steps:
       - name: Clone burntpix benchmarks repo
         run: |
@@ -274,7 +269,7 @@ jobs:
 
       - name: Run burntpix benchmarks
         run: |
-          CLIENT=${{ matrix.client }}
+          CLIENT=${{ needs.run-genesis-init-memory-benchmarks.outputs.clients }}
           REPETITIONS=${{ needs.run-genesis-init-memory-benchmarks.outputs.repetitions }}
           ROOT_DIR=${{ needs.run-genesis-init-memory-benchmarks.outputs.root_dir }}
           DATE=${{ needs.run-genesis-init-memory-benchmarks.outputs.date }}

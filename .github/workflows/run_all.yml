@@ -265,11 +265,6 @@ jobs:
       clients: ${{ needs.run-genesis-init-memory-benchmarks.outputs.clients }}
       sizes: ${{ needs.run-genesis-init-memory-benchmarks.outputs.sizes }}
       repetitions: ${{ needs.run-genesis-init-memory-benchmarks.outputs.repetitions }}
-    strategy:
-      max-parallel: 1
-      matrix:
-        client: ${{ fromJson(needs.run-genesis-init-memory-benchmarks.outputs.matrix).client }}
-      fail-fast: false
     steps:
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
@@ -277,7 +272,7 @@ jobs:
           ssh-private-key: ${{ secrets.PRIVKEY }}
       - name: Run burntpix benchmarks
         run: |
-          CLIENT=${{ matrix.client }}
+          CLIENT=${{ needs.run-genesis-init-memory-benchmarks.outputs.clients }}
           REPETITIONS=${{ needs.run-genesis-init-memory-benchmarks.outputs.repetitions }}
           ROOT_DIR=${{ needs.run-genesis-init-memory-benchmarks.outputs.root_dir }}
           DATE=${{ needs.run-genesis-init-memory-benchmarks.outputs.date }}
