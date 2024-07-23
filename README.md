@@ -5,8 +5,7 @@ This repo's result data is reported by 4 benchmarks:
 | Name | Repo |
 | ---- | ---- |
 | Gas Benchmarks | https://github.com/OpenFusionist/gas-benchmarks/tree/rc-1 |
-| Genesis Init Speed | https://github.com/OpenFusionist/genesis-init-benchmarks |
-| Genesis Memory Speed | https://github.com/OpenFusionist/genesis-init-benchmarks |
+| Genesis Init Speed / Memory Usage | https://github.com/OpenFusionist/genesis-init-benchmarks |
 | Burntpix | https://github.com/OpenFusionist/gas-benchmarks/tree/burnt-rc-1 |
 
 ## Update client version

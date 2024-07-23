@@ -283,7 +283,9 @@ jobs:
             cd "$ROOT_DIR/burntpix-benchmarks"
             git pull
             cp ../benchmarks-data-result/images.yaml .
-            ./run.sh -t "testburnt/" -w "./testburntwarm/warm.txt" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE"
+            IFS=','
+            clients_string="${clients[*]}"
+            ./run.sh -t "testburnt/" -w "./testburntwarm/warm.txt" -c "$clients_string" -r "$REPETITIONS" -o "results-$DATE"
             python3 report_metadata.py "$DATE"
             cp "results-$DATE/reports/index.html" "../benchmarks-data-result/burntpix/$DATE.html"
             cp "results-$DATE/reports/result.json" "../benchmarks-data-result/burntpix/$DATE.json"

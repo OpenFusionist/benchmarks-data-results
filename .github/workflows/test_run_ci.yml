@@ -275,7 +275,9 @@ jobs:
           DATE=${{ needs.run-genesis-init-memory-benchmarks.outputs.date }}
 
           cd "$ROOT_DIR/burntpix-benchmarks"
-          ./run.sh -t "testburnt/" -w "./testburntwarm/warm.txt" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE"
+          IFS=','
+          clients_string="${clients[*]}"
+          ./run.sh -t "testburnt/" -w "./testburntwarm/warm.txt" -c "$clients_string" -r "$REPETITIONS" -o "results-$DATE"
           python3 report_metadata.py "$DATE"
 
       - name: Zip the results folder
