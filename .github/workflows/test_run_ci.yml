@@ -269,15 +269,14 @@ jobs:
 
       - name: Run burntpix benchmarks
         run: |
-          CLIENT=${{ needs.run-genesis-init-memory-benchmarks.outputs.clients }}
+          # Use const due to can't handle ${{ needs.run-genesis-init-memory-benchmarks.outputs.clients }}
+          CLIENT="nethermind,geth,reth,erigon,besu"
           REPETITIONS=${{ needs.run-genesis-init-memory-benchmarks.outputs.repetitions }}
           ROOT_DIR=${{ needs.run-genesis-init-memory-benchmarks.outputs.root_dir }}
           DATE=${{ needs.run-genesis-init-memory-benchmarks.outputs.date }}
 
           cd "$ROOT_DIR/burntpix-benchmarks"
-          IFS=','
-          clients_string="${clients[*]}"
-          ./run.sh -t "testburnt/" -w "./testburntwarm/warm.txt" -c "$clients_string" -r "$REPETITIONS" -o "results-$DATE"
+          ./run.sh -t "testburnt/" -w "./testburntwarm/warm.txt" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE"
           python3 report_metadata.py "$DATE"
 
       - name: Zip the results folder

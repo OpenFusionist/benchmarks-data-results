@@ -272,7 +272,8 @@ jobs:
           ssh-private-key: ${{ secrets.PRIVKEY }}
       - name: Run burntpix benchmarks
         run: |
-          CLIENT=${{ needs.run-genesis-init-memory-benchmarks.outputs.clients }}
+          # Use const due to can't handle ${{ needs.run-genesis-init-memory-benchmarks.outputs.clients }}
+          CLIENT="nethermind,geth,reth,erigon,besu"
           REPETITIONS=${{ needs.run-genesis-init-memory-benchmarks.outputs.repetitions }}
           ROOT_DIR=${{ needs.run-genesis-init-memory-benchmarks.outputs.root_dir }}
           DATE=${{ needs.run-genesis-init-memory-benchmarks.outputs.date }}
@@ -283,12 +284,7 @@ jobs:
             cd "$ROOT_DIR/burntpix-benchmarks"
             git pull
             cp ../benchmarks-data-result/images.yaml .
-            IFS=','
-            clients_string="${clients[*]}"
-            echo "Running benchmarks with the following parameters:"
-            echo "./run.sh -t 'testburnt/' -w './testburntwarm/warm.txt' -c '$clients_string' -r '$REPETITIONS' -o 'results-$DATE'"
-            
-            ./run.sh -t "testburnt/" -w "./testburntwarm/warm.txt" -c "$clients_string" -r "$REPETITIONS" -o "results-$DATE"
+            ./run.sh -t "testburnt/" -w "./testburntwarm/warm.txt" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE"
             python3 report_metadata.py "$DATE"
             cp "results-$DATE/reports/index.html" "../benchmarks-data-result/burntpix/$DATE.html"
             cp "results-$DATE/reports/result.json" "../benchmarks-data-result/burntpix/$DATE.json"
