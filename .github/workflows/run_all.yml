@@ -285,6 +285,9 @@ jobs:
             cp ../benchmarks-data-result/images.yaml .
             IFS=','
             clients_string="${clients[*]}"
+            echo "Running benchmarks with the following parameters:"
+            echo "./run.sh -t 'testburnt/' -w './testburntwarm/warm.txt' -c '$clients_string' -r '$REPETITIONS' -o 'results-$DATE'"
+            
             ./run.sh -t "testburnt/" -w "./testburntwarm/warm.txt" -c "$clients_string" -r "$REPETITIONS" -o "results-$DATE"
             python3 report_metadata.py "$DATE"
             cp "results-$DATE/reports/index.html" "../benchmarks-data-result/burntpix/$DATE.html"
