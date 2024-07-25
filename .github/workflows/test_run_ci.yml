@@ -257,6 +257,12 @@ jobs:
       sizes: ${{ needs.run-genesis-init-memory-benchmarks.outputs.sizes }}
       repetitions: ${{ needs.run-genesis-init-memory-benchmarks.outputs.repetitions }}
     steps:
+      - name: Create /tmp/ directory
+        run: mkdir -p /tmp/
+      
+      - name: Set permissions for /tmp/
+        run: sudo chmod -R 777 /tmp/
+
       - name: Clone burntpix benchmarks repo
         run: |
           ROOT_DIR=${{ needs.run-genesis-init-memory-benchmarks.outputs.root_dir }}
