@@ -208,9 +208,9 @@ jobs:
             cp ../benchmarks-data-result/images.yaml .
             ./runSpeed.sh -t "tests/" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE/speed" -s "$SIZE"
             python3 report_metadata.py "$DATE" speed
-            cp "results-$DATE/speed/reports/speed.html" "../benchmarks-data-result/genesis-init-speed/$DATE.html"
-            cp "results-$DATE/speed/reports/speed.json" "../benchmarks-data-result/genesis-init-speed/$DATE.json"
-            cp "results-$DATE/speed/reports/metadata.json" "../benchmarks-data-result/genesis-init-speed/$DATE.metadata.json"
+            cp "results-$DATE/speed/reports/speed.html" "../benchmarks-data-result/genesis-data/$DATE.speed.html"
+            cp "results-$DATE/speed/reports/speed.json" "../benchmarks-data-result/genesis-data/$DATE.speed.json"
+            cp "results-$DATE/speed/reports/metadata.json" "../benchmarks-data-result/genesis-data/$DATE.metadata.json"
             set -e
           EOF
 
@@ -249,9 +249,11 @@ jobs:
             cp ../benchmarks-data-result/images.yaml .
             ./runMemory.sh -t "tests/" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE/memory" -s "$SIZE"
             python3 report_metadata.py "$DATE" memory
-            cp "results-$DATE/memory/reports/memory.html" "../benchmarks-data-result/genesis-init-memory/$DATE.html"
-            cp "results-$DATE/memory/reports/memory.json" "../benchmarks-data-result/genesis-init-memory/$DATE.json"
-            cp "results-$DATE/memory/reports/metadata.json" "../benchmarks-data-result/genesis-init-memory/$DATE.metadata.json"
+            cp "results-$DATE/memory/reports/memory.html" "../benchmarks-data-result/genesis-data/$DATE.memory.html"
+            cp "results-$DATE/memory/reports/memory.json" "../benchmarks-data-result/genesis-data/$DATE.memory.json"
+            cp "results-$DATE/memory/reports/metadata.json" "../benchmarks-data-result/genesis-data/$DATE.metadata.json"
+            python3 merge_result.py "$DATE"
+            cp "results-$DATE/result.json" "../benchmarks-data-result/genesis-data/$DATE.json"
             set -e
           EOF
 
