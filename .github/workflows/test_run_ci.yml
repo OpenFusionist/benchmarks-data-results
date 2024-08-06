@@ -148,6 +148,15 @@ jobs:
           ./run.sh -t "tests/" -w "" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE"
           python3 report_metadata.py "$DATE"
 
+          sudo apt-get install -y jq
+          max_value=$(jq -r '.["'"${{ matrix.client }}"'"].GasLimit.max' "results-$DATE/reports/result.json")
+          if [ "$max_value" = "0" ] || [ -z "$max_value" ]; then
+            echo "Client '${{ matrix.client }}' has no valid data (max=0 or missing)."
+            exit 1
+          else
+            echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
+          fi
+
       - name: Zip the results folder
         run: |
           ROOT_DIR=${{ needs.generate-matrix.outputs.root_dir }}
@@ -209,6 +218,15 @@ jobs:
           cd "$ROOT_DIR/genesis-init-benchmarks"
           ./runSpeed.sh -t "tests/" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE/speed" -s "$SIZE"
           python3 report_metadata.py "$DATE" speed
+
+          sudo apt-get install -y jq
+          max_value=$(jq -r '.speed["'"${{ matrix.client }}"'"]["'"${{ matrix.size }}"'"].first.max'  "results-$DATE/speed/reports/speed.json")
+          if [ "$max_value" = "0" ] || [ -z "$max_value" ]; then
+            echo "Client '${{ matrix.client }}' has no valid data (max=0 or missing)."
+            exit 1
+          else
+            echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
+          fi
 
       - name: Zip the results folder
         run: |
@@ -272,6 +290,15 @@ jobs:
           ./runMemory.sh -t "tests/" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE/memory" -s "$SIZE"
           python3 report_metadata.py "$DATE" memory
 
+          sudo apt-get install -y jq
+          max_value=$(jq -r '.memory["'"${{ matrix.client }}"'"]["'"${{ matrix.size }}"'"].first.max'  "results-$DATE/memory/reports/memory.json")
+          if [ "$max_value" = "0" ] || [ -z "$max_value" ]; then
+            echo "Client '${{ matrix.client }}' has no valid data (max=0 or missing)."
+            exit 1
+          else
+            echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
+          fi
+
       - name: Zip the results folder
         run: |
           ROOT_DIR=${{ needs.run-genesis-init-speed-benchmarks.outputs.root_dir }}
@@ -334,6 +361,15 @@ jobs:
           ./run.sh -t "testburnt/" -w "./testburntwarm/warm.txt" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE"
           python3 report_metadata.py "$DATE"
 
+          sudo apt-get install -y jq
+          max_value=$(jq -r '.["'"${{ matrix.client }}"'"].GasLimit.max' "results-$DATE/reports/result.json")
+          if [ "$max_value" = "0" ] || [ -z "$max_value" ]; then
+            echo "Client '${{ matrix.client }}' has no valid data (max=0 or missing)."
+            exit 1
+          else
+            echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
+          fi
+          
       - name: Zip the results folder
         run: |
           ROOT_DIR=${{ needs.run-genesis-init-memory-benchmarks.outputs.root_dir }}
