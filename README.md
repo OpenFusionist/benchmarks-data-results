@@ -1,6 +1,6 @@
 ## Description
 
-This repo's result data is reported by 4 benchmarks:
+This repo's result data is reported by 3 benchmarks:
 
 | Name | Repo |
 | ---- | ---- |
