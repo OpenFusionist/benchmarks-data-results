@@ -10,7 +10,7 @@ This repo's result data is reported by 3 benchmarks:
 
 ## Update client version
 
-The config file of client version is [images.yaml](https://github.com/OpenFusionist/benchmarks-data-results/blob/main/images.yaml) , all benchmarks repo will use this config file when script running. If you want to upgrade the client version, just pull reuqestion for update this file in this repo.
+The configuration file for the client version is [images.yaml](https://github.com/OpenFusionist/benchmarks-data-results/blob/main/images.yaml). All benchmark repositories will use this configuration file when the script is running. If you want to upgrade the client version, submit a pull request to update this file in this repository.
 
 ## Run benchmarks yourself
 
