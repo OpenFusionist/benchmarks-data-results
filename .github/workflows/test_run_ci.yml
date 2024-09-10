@@ -299,6 +299,14 @@ jobs:
             echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
           fi
 
+          max_value=$(jq -r '.memory["'"${{ matrix.client }}"'"]["'"${{ matrix.size }}"'"].second.max'  "results-$DATE/memory/reports/memory.json")
+          if [ "$max_value" = "0" ] || [ -z "$max_value" ]; then
+            echo "Client '${{ matrix.client }}' has no valid data (max=0 or missing)."
+            exit 1
+          else
+            echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
+          fi
+
       - name: Zip the results folder
         run: |
           ROOT_DIR=${{ needs.run-genesis-init-speed-benchmarks.outputs.root_dir }}
