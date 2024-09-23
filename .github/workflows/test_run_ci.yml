@@ -12,9 +12,9 @@ on:
         required: false
         default: ""
       clients:
-        description: 'Enter clients to use (e.g., [nethermind,geth,reth,erigon,besu])'
+        description: "Enter clients to use (e.g., [nethermind,geth,reth,erigon,besu])"
         required: true
-        default: '[nethermind,geth,reth,erigon,besu]'
+        default: "[nethermind,geth,reth,erigon,besu]"
       sizes:
         description: "Enter sizes (e.g., [500,1000])"
         required: false
@@ -25,7 +25,7 @@ on:
         default: 1
   pull_request:
     types: [opened, synchronize]
-    
+
 jobs:
   setup-environment:
     runs-on: ubuntu-latest
@@ -124,7 +124,7 @@ jobs:
           mkdir -p "${ROOT_DIR}"
           cd "${ROOT_DIR}"
           git clone -b $BRANCH_GAS_BENCHMARKS https://github.com/OpenFusionist/gas-benchmarks.git gas-benchmarks
-          
+
       - name: Checkout PR branch of benchmarks-data-results
         uses: actions/checkout@v3
         with:
@@ -136,7 +136,7 @@ jobs:
         run: |
           ROOT_DIR=${{ needs.generate-matrix.outputs.root_dir }}
           cp "${GITHUB_WORKSPACE}/benchmarks-data-result/images.yaml" "${ROOT_DIR}/gas-benchmarks/"
-  
+
       - name: Run gas benchmarks
         run: |
           CLIENT=${{ matrix.client }}
@@ -194,7 +194,7 @@ jobs:
           mkdir -p "${ROOT_DIR}"
           cd "${ROOT_DIR}"
           git clone -b $BRANCH_GENESIS_INIT_BENCHMARKS https://github.com/OpenFusionist/genesis-init-benchmarks.git genesis-init-benchmarks
-      
+
       - name: Checkout PR branch of benchmarks-data-results
         uses: actions/checkout@v3
         with:
@@ -333,7 +333,7 @@ jobs:
     steps:
       - name: Create /tmp/ directory
         run: mkdir -p /tmp/
-      
+
       - name: Set permissions for /tmp/
         run: sudo chmod -R 777 /tmp/
 
@@ -344,7 +344,7 @@ jobs:
           mkdir -p "${ROOT_DIR}"
           cd "${ROOT_DIR}"
           git clone -b $BRANCH_BURNTPIX_BENCHMARKS https://github.com/OpenFusionist/gas-benchmarks.git burntpix-benchmarks
-      
+
       - name: Checkout PR branch of benchmarks-data-results
         uses: actions/checkout@v3
         with:
@@ -377,7 +377,7 @@ jobs:
           else
             echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
           fi
-          
+
       - name: Zip the results folder
         run: |
           ROOT_DIR=${{ needs.run-genesis-init-memory-benchmarks.outputs.root_dir }}
