@@ -68,8 +68,17 @@ jobs:
 
           ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=60 root@${{ secrets.REMOTE_IP }} << EOF
             set +e
+            # Clear target directories only if they exist
+            [ -d "${{ env.ROOT_DIR }}/benchmarks-data-result" ] && rm -rf "${{ env.ROOT_DIR }}/benchmarks-data-result"
+            [ -d "${{ env.ROOT_DIR }}/gas-benchmarks" ] && rm -rf "${{ env.ROOT_DIR }}/gas-benchmarks"
+            [ -d "${{ env.ROOT_DIR }}/burntpix-benchmarks" ] && rm -rf "${{ env.ROOT_DIR }}/burntpix-benchmarks"
+            [ -d "${{ env.ROOT_DIR }}/genesis-init-benchmarks" ] && rm -rf "${{ env.ROOT_DIR }}/genesis-init-benchmarks"
+            
+            # Create root directory if it doesn't exist
             mkdir -p "${{ env.ROOT_DIR }}"
             cd "${{ env.ROOT_DIR }}"
+            
+            # Clone repositories
             git clone -b $BRANCH_BENCHMARKS_DATA_RESULT https://${{ secrets.GIT_TOKEN_PREFIX }}@github.com/OpenFusionist/benchmarks-data-results.git benchmarks-data-result
             git clone -b $BRANCH_GAS_BENCHMARKS https://github.com/OpenFusionist/gas-benchmarks.git gas-benchmarks
             git clone -b $BRANCH_BURNTPIX_BENCHMARKS https://github.com/OpenFusionist/gas-benchmarks.git burntpix-benchmarks
