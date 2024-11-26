@@ -41,6 +41,7 @@ jobs:
       clients: ${{ steps.set-date.outputs.clients }}
       sizes: ${{ steps.set-date.outputs.sizes }}
       repetitions: ${{ steps.set-date.outputs.repetitions }}
+      dotnet-version: "9.0.x"
     steps:
       - name: Set DATE variable
         id: set-date
@@ -108,14 +109,10 @@ jobs:
         client: ${{ fromJson(needs.generate-matrix.outputs.matrix).Client }}
       fail-fast: false
     steps:
-      - name: Increase swapfile
-        run: |
-          sudo swapoff -a
-          sudo fallocate -l 15G /swapfile
-          sudo chmod 600 /swapfile
-          sudo mkswap /swapfile
-          sudo swapon /swapfile
-          sudo swapon --show
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
 
       - name: Clone gas benchmarks repo
         run: |
@@ -187,6 +184,11 @@ jobs:
         size: ${{ fromJson(needs.run-gas-benchmarks.outputs.matrix).Size }}
       fail-fast: false
     steps:
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
       - name: Clone genesis init benchmarks repo
         run: |
           ROOT_DIR=${{ needs.run-gas-benchmarks.outputs.root_dir }}
@@ -258,6 +260,11 @@ jobs:
         size: ${{ fromJson(needs.run-genesis-init-speed-benchmarks.outputs.matrix).Size }}
       fail-fast: false
     steps:
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
       - name: Clone genesis init benchmarks repo
         run: |
           ROOT_DIR=${{ needs.run-genesis-init-speed-benchmarks.outputs.root_dir }}
@@ -331,6 +338,11 @@ jobs:
       sizes: ${{ needs.run-genesis-init-memory-benchmarks.outputs.sizes }}
       repetitions: ${{ needs.run-genesis-init-memory-benchmarks.outputs.repetitions }}
     steps:
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
       - name: Create /tmp/ directory
         run: mkdir -p /tmp/
 
