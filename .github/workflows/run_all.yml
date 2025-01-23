@@ -175,7 +175,9 @@ jobs:
             cp ../benchmarks-data-results/images.yaml .
             ./run.sh -t "tests/" -w "warmup/warmup-1000bl-16wi-24tx.txt" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE"
             python3 report_metadata.py "$DATE"
-            cp "results-$DATE/reports/"* "../benchmarks-data-results/gas/$DATE"*
+            cp "results-$DATE/reports/index.html" "../benchmarks-data-results/gas/$DATE.html"
+            cp "results-$DATE/reports/result.json" "../benchmarks-data-results/gas/$DATE.json"
+            cp "results-$DATE/reports/metadata.json" "../benchmarks-data-results/gas/$DATE.metadata.json"
             
             # Run genesis init speed benchmarks
             echo "=== Running genesis init speed benchmarks for $CLIENT ==="
@@ -183,13 +185,17 @@ jobs:
             cp ../benchmarks-data-results/images.yaml .
             ./runSpeed.sh -t "tests/" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE/speed" -s "$SIZE"
             python3 report_metadata.py "$DATE" speed
-            cp "results-$DATE/speed/reports/"* "../benchmarks-data-results/genesis-data/$DATE"*
+            cp "results-$DATE/speed/reports/speed.html" "../benchmarks-data-results/genesis-data/$DATE.speed.html"
+            cp "results-$DATE/speed/reports/speed.json" "../benchmarks-data-results/genesis-data/$DATE.speed.json"
+            cp "results-$DATE/speed/reports/metadata.json" "../benchmarks-data-results/genesis-data/$DATE.metadata.json"
             
             # Run genesis init memory benchmarks
             echo "=== Running genesis init memory benchmarks for $CLIENT ==="
             ./runMemory.sh -t "tests/" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE/memory" -s "$SIZE"
             python3 report_metadata.py "$DATE" memory
-            cp "results-$DATE/memory/reports/"* "../benchmarks-data-results/genesis-data/$DATE"*
+            cp "results-$DATE/memory/reports/memory.html" "../benchmarks-data-results/genesis-data/$DATE.memory.html"
+            cp "results-$DATE/memory/reports/memory.json" "../benchmarks-data-results/genesis-data/$DATE.memory.json"
+            cp "results-$DATE/memory/reports/metadata.json" "../benchmarks-data-results/genesis-data/$DATE.metadata.json"
             python3 merge_result.py "$DATE"
             cp "results-$DATE/result.json" "../benchmarks-data-results/genesis-data/$DATE.json"
             
@@ -199,7 +205,9 @@ jobs:
             cp ../benchmarks-data-results/images.yaml .
             ./run.sh -t "testburnt/" -w "./testburntwarm/warm.txt" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE"
             python3 report_metadata.py "$DATE"
-            cp "results-$DATE/reports/"* "../benchmarks-data-results/burntpix/$DATE"*
+            cp "results-$DATE/reports/index.html" "../benchmarks-data-results/burntpix/$DATE.html"
+            cp "results-$DATE/reports/result.json" "../benchmarks-data-results/burntpix/$DATE.json"
+            cp "results-$DATE/reports/metadata.json" "../benchmarks-data-results/burntpix/$DATE.metadata.json"
             set -e
           EOF
 
