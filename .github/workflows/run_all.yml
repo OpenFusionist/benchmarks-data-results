@@ -69,7 +69,7 @@ jobs:
       - name: Clone and prepare repositories
         run: |
           declare -A REPOS=(
-            ["benchmarks-data-result"]="main"
+            ["benchmarks-data-results"]="main"
             ["gas-benchmarks"]="rc-1"
             ["burntpix-benchmarks"]="burnt-rc-1"
             ["genesis-init-benchmarks"]="main"
@@ -83,8 +83,8 @@ jobs:
             for repo in "\${!REPOS[@]}"; do
               [ -d "\$repo" ] && rm -rf "\$repo"
               branch="\${REPOS[\$repo]}"
-              if [ "\$repo" = "benchmarks-data-result" ]; then
-              # Use personal access token to clone benchmarks-data-result for private repository
+              if [ "\$repo" = "benchmarks-data-results" ]; then
+              # Use personal access token to clone benchmarks-data-results for private repository
                 git clone -b "\$branch" https://${{ secrets.GIT_TOKEN_PREFIX }}@github.com/OpenFusionist/\$repo.git \$repo
               else
                 git clone -b "\$branch" https://github.com/OpenFusionist/\$repo.git \$repo
@@ -100,7 +100,7 @@ jobs:
         run: |
           ssh ${{ env.SSH_OPTIONS }} root@${{ secrets.REMOTE_IP }} << EOF
             set +e
-            cd "${{ env.ROOT_DIR }}/benchmarks-data-result"
+            cd "${{ env.ROOT_DIR }}/benchmarks-data-results"
             git reset --hard
             git clean -fd 
             git pull
@@ -172,34 +172,34 @@ jobs:
             # Run gas benchmarks
             echo "=== Running gas benchmarks for $CLIENT ==="
             cd gas-benchmarks
-            cp ../benchmarks-data-result/images.yaml .
+            cp ../benchmarks-data-results/images.yaml .
             ./run.sh -t "tests/" -w "warmup/warmup-1000bl-16wi-24tx.txt" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE"
             python3 report_metadata.py "$DATE"
-            cp "results-$DATE/reports/"* "../benchmarks-data-result/gas/$DATE"*
+            cp "results-$DATE/reports/"* "../benchmarks-data-results/gas/$DATE"*
             
             # Run genesis init speed benchmarks
             echo "=== Running genesis init speed benchmarks for $CLIENT ==="
             cd ../genesis-init-benchmarks
-            cp ../benchmarks-data-result/images.yaml .
+            cp ../benchmarks-data-results/images.yaml .
             ./runSpeed.sh -t "tests/" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE/speed" -s "$SIZE"
             python3 report_metadata.py "$DATE" speed
-            cp "results-$DATE/speed/reports/"* "../benchmarks-data-result/genesis-data/$DATE"*
+            cp "results-$DATE/speed/reports/"* "../benchmarks-data-results/genesis-data/$DATE"*
             
             # Run genesis init memory benchmarks
             echo "=== Running genesis init memory benchmarks for $CLIENT ==="
             ./runMemory.sh -t "tests/" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE/memory" -s "$SIZE"
             python3 report_metadata.py "$DATE" memory
-            cp "results-$DATE/memory/reports/"* "../benchmarks-data-result/genesis-data/$DATE"*
+            cp "results-$DATE/memory/reports/"* "../benchmarks-data-results/genesis-data/$DATE"*
             python3 merge_result.py "$DATE"
-            cp "results-$DATE/result.json" "../benchmarks-data-result/genesis-data/$DATE.json"
+            cp "results-$DATE/result.json" "../benchmarks-data-results/genesis-data/$DATE.json"
             
             # Run burntpix benchmarks
             echo "=== Running burntpix benchmarks for $CLIENT ==="
             cd ../burntpix-benchmarks
-            cp ../benchmarks-data-result/images.yaml .
+            cp ../benchmarks-data-results/images.yaml .
             ./run.sh -t "testburnt/" -w "./testburntwarm/warm.txt" -c "$CLIENT" -r "$REPETITIONS" -o "results-$DATE"
             python3 report_metadata.py "$DATE"
-            cp "results-$DATE/reports/"* "../benchmarks-data-result/burntpix/$DATE"*
+            cp "results-$DATE/reports/"* "../benchmarks-data-results/burntpix/$DATE"*
             set -e
           EOF
 
@@ -218,7 +218,7 @@ jobs:
         run: |
           ssh ${{ env.SSH_OPTIONS }} root@${{ secrets.REMOTE_IP }} << EOF
             set +e
-            cd "$ROOT_DIR/benchmarks-data-result"
+            cd "$ROOT_DIR/benchmarks-data-results"
             git add .
             git commit -m "Add benchmark results"
             git push
