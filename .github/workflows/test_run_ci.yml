@@ -222,22 +222,22 @@ jobs:
           python3 report_metadata.py "$DATE" speed
 
           sudo apt-get install -y jq
-          echo "check  first run speed max_value"
-          max_value=$(jq -r '.["'"${{ matrix.client }}"'"]["'"${{ matrix.size }}"'"].first.max'  "results-$DATE/speed/reports/speed.json")
-          if [ "$max_value" = "0" ] || [ "$max_value" = "-1" ] || [ "$max_value" = "null" ]; then
-            echo "Client '${{ matrix.client }}' has no valid data (max=0,-1 or missing)."
-            exit 1
-          else
-            echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
-          fi
-          echo "check  second run speed max_value"
-          max_value=$(jq -r '.["'"${{ matrix.client }}"'"]["'"${{ matrix.size }}"'"].second.max'  "results-$DATE/speed/reports/speed.json")
-          if [ "$max_value" = "0" ] || [ "$max_value" = "-1" ] || [ "$max_value" = "null" ]; then
-            echo "Client '${{ matrix.client }}' has no valid data (max=0,-1 or missing)."
-            exit 1
-          else
-            echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
-          fi
+
+          for run in first second; do
+            echo "Debug - Checking $run run speed for Client: $CLIENT Size: ${SIZE}M Date: $DATE"
+            echo "jq path: .\"$CLIENT\".\"${SIZE}M\".$run.max"
+            max_value=$(jq -r \
+              --arg client "$CLIENT" \
+              --arg size "${SIZE}M" \
+              --arg run "$run" \
+              '.[$client][$size][$run].max' "results-$DATE/speed/reports/speed.json")
+            if [ "$max_value" = "0" ] || [ "$max_value" = "-1" ] || [ "$max_value" = "null" ]; then
+              echo "Client '$CLIENT' has no valid data in $run run (max=0,-1 or missing)."
+              exit 1
+            else
+              echo "Client '$CLIENT' has valid data in $run run (max=$max_value)."
+            fi
+          done
 
       - name: Zip the results folder
         run: |
@@ -307,23 +307,21 @@ jobs:
           python3 report_metadata.py "$DATE" memory
 
           sudo apt-get install -y jq
-          echo "check  first run memory max_value"
-          max_value=$(jq -r '.["'"${{ matrix.client }}"'"]["'"${{ matrix.size }}"'"].first.max'  "results-$DATE/memory/reports/memory.json")
-          if [ "$max_value" = "0" ] || [ "$max_value" = "-1" ] || [ "$max_value" = "null" ]; then
-            echo "Client '${{ matrix.client }}' has no valid data (max=0,-1 or missing)."
-            exit 1
-          else
-            echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
-          fi
 
-          echo "check  second run memory max_value"
-          max_value=$(jq -r '.["'"${{ matrix.client }}"'"]["'"${{ matrix.size }}"'"].second.max'  "results-$DATE/memory/reports/memory.json")
-          if [ "$max_value" = "0" ] || [ "$max_value" = "-1" ] || [ "$max_value" = "null" ]; then
-            echo "Client '${{ matrix.client }}' has no valid data (max=0,-1 or missing)."
-            exit 1
-          else
-            echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
-          fi
+          for run in first second; do
+            echo "Check $run run memory max_value"
+            max_value=$(jq -r \
+              --arg client "$CLIENT" \
+              --arg size "${SIZE}M" \
+              --arg run "$run" \
+              '.[$client][$size][$run].max' "results-$DATE/memory/reports/memory.json")
+            if [ "$max_value" = "0" ] || [ "$max_value" = "-1" ] || [ "$max_value" = "null" ]; then
+              echo "Client '$CLIENT' has no valid data in $run run (max=0, -1 or missing)."
+              exit 1
+            else
+              echo "Client '$CLIENT' has valid data in $run run (max=$max_value)."
+            fi
+          done
 
       - name: Zip the results folder
         run: |
