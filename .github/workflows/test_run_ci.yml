@@ -147,8 +147,8 @@ jobs:
 
           sudo apt-get install -y jq
           max_value=$(jq -r '.["'"${{ matrix.client }}"'"].GasLimit.max' "results-$DATE/reports/result.json")
-          if [ "$max_value" = "0" ] || [ -z "$max_value" ]; then
-            echo "Client '${{ matrix.client }}' has no valid data (max=0 or missing)."
+          if [ "$max_value" = "0" ] || [ "$max_value" = "-1" ] || [ "$max_value" = "null" ]; then
+            echo "Client '${{ matrix.client }}' has no valid data (max=0,-1 or missing)."
             exit 1
           else
             echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
@@ -222,9 +222,18 @@ jobs:
           python3 report_metadata.py "$DATE" speed
 
           sudo apt-get install -y jq
-          max_value=$(jq -r '.speed["'"${{ matrix.client }}"'"]["'"${{ matrix.size }}"'"].first.max'  "results-$DATE/speed/reports/speed.json")
-          if [ "$max_value" = "0" ] || [ -z "$max_value" ]; then
-            echo "Client '${{ matrix.client }}' has no valid data (max=0 or missing)."
+          echo "check  first run speed max_value"
+          max_value=$(jq -r '.["'"${{ matrix.client }}"'"]["'"${{ matrix.size }}"'"].first.max'  "results-$DATE/speed/reports/speed.json")
+          if [ "$max_value" = "0" ] || [ "$max_value" = "-1" ] || [ "$max_value" = "null" ]; then
+            echo "Client '${{ matrix.client }}' has no valid data (max=0,-1 or missing)."
+            exit 1
+          else
+            echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
+          fi
+          echo "check  second run speed max_value"
+          max_value=$(jq -r '.["'"${{ matrix.client }}"'"]["'"${{ matrix.size }}"'"].second.max'  "results-$DATE/speed/reports/speed.json")
+          if [ "$max_value" = "0" ] || [ "$max_value" = "-1" ] || [ "$max_value" = "null" ]; then
+            echo "Client '${{ matrix.client }}' has no valid data (max=0,-1 or missing)."
             exit 1
           else
             echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
@@ -298,17 +307,19 @@ jobs:
           python3 report_metadata.py "$DATE" memory
 
           sudo apt-get install -y jq
-          max_value=$(jq -r '.memory["'"${{ matrix.client }}"'"]["'"${{ matrix.size }}"'"].first.max'  "results-$DATE/memory/reports/memory.json")
-          if [ "$max_value" = "0" ] || [ -z "$max_value" ]; then
-            echo "Client '${{ matrix.client }}' has no valid data (max=0 or missing)."
+          echo "check  first run memory max_value"
+          max_value=$(jq -r '.["'"${{ matrix.client }}"'"]["'"${{ matrix.size }}"'"].first.max'  "results-$DATE/memory/reports/memory.json")
+          if [ "$max_value" = "0" ] || [ "$max_value" = "-1" ] || [ "$max_value" = "null" ]; then
+            echo "Client '${{ matrix.client }}' has no valid data (max=0,-1 or missing)."
             exit 1
           else
             echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
           fi
 
-          max_value=$(jq -r '.memory["'"${{ matrix.client }}"'"]["'"${{ matrix.size }}"'"].second.max'  "results-$DATE/memory/reports/memory.json")
-          if [ "$max_value" = "0" ] || [ -z "$max_value" ]; then
-            echo "Client '${{ matrix.client }}' has no valid data (max=0 or missing)."
+          echo "check  second run memory max_value"
+          max_value=$(jq -r '.["'"${{ matrix.client }}"'"]["'"${{ matrix.size }}"'"].second.max'  "results-$DATE/memory/reports/memory.json")
+          if [ "$max_value" = "0" ] || [ "$max_value" = "-1" ] || [ "$max_value" = "null" ]; then
+            echo "Client '${{ matrix.client }}' has no valid data (max=0,-1 or missing)."
             exit 1
           else
             echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
@@ -383,8 +394,8 @@ jobs:
 
           sudo apt-get install -y jq
           max_value=$(jq -r '.["'"${{ matrix.client }}"'"].GasLimit.max' "results-$DATE/reports/result.json")
-          if [ "$max_value" = "0" ] || [ -z "$max_value" ]; then
-            echo "Client '${{ matrix.client }}' has no valid data (max=0 or missing)."
+          if [ "$max_value" = "0" ] || [ "$max_value" = "-1" ] || [ "$max_value" = "null" ]; then
+            echo "Client '${{ matrix.client }}' has no valid data (max=0,-1 or missing)."
             exit 1
           else
             echo "Client '${{ matrix.client }}' has valid data (max=$max_value)."
