@@ -1,0 +1,7619 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Benchmarking Report
+  </title>
+  <style>
+   body {            font-family: Arial, sans-serif;        }        table {            border-collapse: collapse;            margin-bottom: 20px;        }        th, td {            border: 1px solid #ddd;            padding: 8px;            text-align: center;        }        th {            background-color: #f2f2f2;        }        .title {            text-align: left;        }        .preserve-newlines {            white-space: pre-wrap;        }
+  </style>
+ </head>
+ <body>
+  <h2>
+   Computer Specs
+  </h2>
+  <pre>Computer Specs:
+Processor: x86_64
+System: Linux
+Release: 5.15.0-136-generic
+Version: #147-Ubuntu SMP Sat Mar 15 15:53:30 UTC 2025
+Machine: x86_64
+Processor Architecture: 64bit
+RAM: 61.92 GB
+CPU: AMD Ryzen 7 PRO 8700GE w/ Radeon 780M Graphics
+Numbers of CPU: 16
+CPU GHz: 2254.303375 MHz
+
+</pre>
+  <h1>
+   Nethermind - nethermind/nethermind:1.32.2 - Benchmarking Report
+  </h1>
+  <table id="table_nethermind">
+   <thread>
+    <tr>
+     <th class="title" onclick="sortTable(0, 'table_nethermind', false)" style="cursor: pointer;">
+      Title ↑ ↓
+     </th>
+     <th onclick="sortTable(1, 'table_nethermind', true)" style="cursor: pointer;">
+      Max (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(2, 'table_nethermind', true)" style="cursor: pointer;">
+      p50 (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(3, 'table_nethermind', true)" style="cursor: pointer;">
+      p95 (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(4, 'table_nethermind', true)" style="cursor: pointer;">
+      p99 (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(5, 'table_nethermind', true)" style="cursor: pointer;">
+      Min (MGas/s) ↑ ↓
+     </th>
+     <th>
+      N
+     </th>
+     <th class="title">
+      Description
+     </th>
+    </tr>
+   </thread>
+   <tbody>
+    <tr>
+     <td class="title">
+      Keccak256 from 32 bytes
+     </td>
+     <td>
+      114.89
+     </td>
+     <td>
+      109.26
+     </td>
+     <td>
+      97.72
+     </td>
+     <td>
+      86.13
+     </td>
+     <td>
+      85.48
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Keccak calculations based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Keccak256 from 1 byte
+     </td>
+     <td>
+      1096.99
+     </td>
+     <td>
+      923.88
+     </td>
+     <td>
+      592.18
+     </td>
+     <td>
+      496.96
+     </td>
+     <td>
+      493.35
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Keccak calculations based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Keccak256 from 8 bytes
+     </td>
+     <td>
+      115.07
+     </td>
+     <td>
+      109.80
+     </td>
+     <td>
+      99.23
+     </td>
+     <td>
+      98.31
+     </td>
+     <td>
+      98.28
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Keccak calculations based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Push0-Pop
+     </td>
+     <td>
+      993.67
+     </td>
+     <td>
+      879.87
+     </td>
+     <td>
+      577.21
+     </td>
+     <td>
+      486.85
+     </td>
+     <td>
+      479.98
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zeros to stack, then popping it
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      MStore - zero
+     </td>
+     <td>
+      477.35
+     </td>
+     <td>
+      431.32
+     </td>
+     <td>
+      342.90
+     </td>
+     <td>
+      311.39
+     </td>
+     <td>
+      309.92
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zero value to memory with offset zero
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      MStore - random
+     </td>
+     <td>
+      462.33
+     </td>
+     <td>
+      421.25
+     </td>
+     <td>
+      332.52
+     </td>
+     <td>
+      302.33
+     </td>
+     <td>
+      298.71
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing random value to memory with offset zero
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      PrevRandao
+     </td>
+     <td>
+      413.18
+     </td>
+     <td>
+      380.66
+     </td>
+     <td>
+      243.52
+     </td>
+     <td>
+      229.43
+     </td>
+     <td>
+      229.27
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing previous block's randao mix to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      CoinBase
+     </td>
+     <td>
+      428.95
+     </td>
+     <td>
+      391.02
+     </td>
+     <td>
+      318.67
+     </td>
+     <td>
+      288.15
+     </td>
+     <td>
+      287.00
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's coinbase to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Gas
+     </td>
+     <td>
+      410.10
+     </td>
+     <td>
+      381.55
+     </td>
+     <td>
+      297.26
+     </td>
+     <td>
+      261.89
+     </td>
+     <td>
+      256.25
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing amount of remaining gas to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Number
+     </td>
+     <td>
+      697.34
+     </td>
+     <td>
+      584.42
+     </td>
+     <td>
+      455.91
+     </td>
+     <td>
+      427.15
+     </td>
+     <td>
+      422.43
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's number to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Timestamp
+     </td>
+     <td>
+      707.20
+     </td>
+     <td>
+      595.25
+     </td>
+     <td>
+      447.44
+     </td>
+     <td>
+      392.44
+     </td>
+     <td>
+      386.50
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's timestamp to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Caller
+     </td>
+     <td>
+      659.65
+     </td>
+     <td>
+      574.23
+     </td>
+     <td>
+      443.65
+     </td>
+     <td>
+      391.38
+     </td>
+     <td>
+      388.37
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing caller address to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      CodeCopy
+     </td>
+     <td>
+      390.15
+     </td>
+     <td>
+      359.78
+     </td>
+     <td>
+      300.08
+     </td>
+     <td>
+      239.16
+     </td>
+     <td>
+      226.60
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly loading 32-bytes of code to the memory
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      BaseFee
+     </td>
+     <td>
+      420.11
+     </td>
+     <td>
+      381.23
+     </td>
+     <td>
+      318.90
+     </td>
+     <td>
+      305.05
+     </td>
+     <td>
+      303.68
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current base fee to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcRecover precompile
+     </td>
+     <td>
+      8200.16
+     </td>
+     <td>
+      3703.46
+     </td>
+     <td>
+      1671.07
+     </td>
+     <td>
+      1350.26
+     </td>
+     <td>
+      1330.79
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      EcRecover precompile calculations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 1k rounds
+     </td>
+     <td>
+      2860.15
+     </td>
+     <td>
+      2341.39
+     </td>
+     <td>
+      857.31
+     </td>
+     <td>
+      1501.86
+     </td>
+     <td>
+      770.47
+     </td>
+     <td>
+      64
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 1000 rounds of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 1 round
+     </td>
+     <td>
+      315.51
+     </td>
+     <td>
+      283.99
+     </td>
+     <td>
+      243.22
+     </td>
+     <td>
+      246.91
+     </td>
+     <td>
+      230.82
+     </td>
+     <td>
+      80
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 1 round of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 10M rounds
+     </td>
+     <td>
+      1423.52
+     </td>
+     <td>
+      748.87
+     </td>
+     <td>
+      345.29
+     </td>
+     <td>
+      798.06
+     </td>
+     <td>
+      326.22
+     </td>
+     <td>
+      56
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 10_000_000 rounds of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 1M rounds
+     </td>
+     <td>
+      7292.41
+     </td>
+     <td>
+      3886.06
+     </td>
+     <td>
+      1448.35
+     </td>
+     <td>
+      3857.45
+     </td>
+     <td>
+      1266.16
+     </td>
+     <td>
+      56
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 1_000_000 rounds of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 128 bytes
+     </td>
+     <td>
+      814.53
+     </td>
+     <td>
+      700.14
+     </td>
+     <td>
+      497.77
+     </td>
+     <td>
+      435.29
+     </td>
+     <td>
+      430.62
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 128-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      RipemdFrom16KBytes
+     </td>
+     <td>
+      809.59
+     </td>
+     <td>
+      737.50
+     </td>
+     <td>
+      559.00
+     </td>
+     <td>
+      424.83
+     </td>
+     <td>
+      421.28
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Description not found on metadata file
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 32 bytes
+     </td>
+     <td>
+      927.45
+     </td>
+     <td>
+      781.87
+     </td>
+     <td>
+      547.59
+     </td>
+     <td>
+      456.49
+     </td>
+     <td>
+      429.55
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 8 bytes
+     </td>
+     <td>
+      2341.09
+     </td>
+     <td>
+      1949.84
+     </td>
+     <td>
+      915.90
+     </td>
+     <td>
+      702.86
+     </td>
+     <td>
+      691.69
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 1 byte
+     </td>
+     <td>
+      2320.83
+     </td>
+     <td>
+      1826.95
+     </td>
+     <td>
+      865.52
+     </td>
+     <td>
+      693.81
+     </td>
+     <td>
+      668.77
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      RipemdFrom1024Bytes
+     </td>
+     <td>
+      797.02
+     </td>
+     <td>
+      705.17
+     </td>
+     <td>
+      558.71
+     </td>
+     <td>
+      449.63
+     </td>
+     <td>
+      424.78
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Description not found on metadata file
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 8 bytes
+     </td>
+     <td>
+      164.68
+     </td>
+     <td>
+      152.09
+     </td>
+     <td>
+      136.85
+     </td>
+     <td>
+      101.63
+     </td>
+     <td>
+      93.50
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 1 byte
+     </td>
+     <td>
+      544.54
+     </td>
+     <td>
+      465.83
+     </td>
+     <td>
+      363.18
+     </td>
+     <td>
+      341.28
+     </td>
+     <td>
+      340.69
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 32 bytes
+     </td>
+     <td>
+      164.81
+     </td>
+     <td>
+      151.04
+     </td>
+     <td>
+      138.02
+     </td>
+     <td>
+      92.91
+     </td>
+     <td>
+      92.52
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 128 bytes
+     </td>
+     <td>
+      185.68
+     </td>
+     <td>
+      167.46
+     </td>
+     <td>
+      145.86
+     </td>
+     <td>
+      99.45
+     </td>
+     <td>
+      98.49
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 128-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Point evaluation - one data
+     </td>
+     <td>
+      33365.76
+     </td>
+     <td>
+      8480.20
+     </td>
+     <td>
+      2429.84
+     </td>
+     <td>
+      1162.77
+     </td>
+     <td>
+      963.37
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      Point evaluation precompile repeating computations on the same data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 128 bytes
+     </td>
+     <td>
+      403.09
+     </td>
+     <td>
+      354.03
+     </td>
+     <td>
+      302.50
+     </td>
+     <td>
+      269.44
+     </td>
+     <td>
+      265.70
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 128-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 32 bytes
+     </td>
+     <td>
+      384.59
+     </td>
+     <td>
+      339.66
+     </td>
+     <td>
+      291.25
+     </td>
+     <td>
+      146.16
+     </td>
+     <td>
+      115.17
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 8 bytes
+     </td>
+     <td>
+      386.71
+     </td>
+     <td>
+      340.79
+     </td>
+     <td>
+      284.98
+     </td>
+     <td>
+      228.48
+     </td>
+     <td>
+      220.41
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 1 byte
+     </td>
+     <td>
+      384.91
+     </td>
+     <td>
+      345.28
+     </td>
+     <td>
+      294.33
+     </td>
+     <td>
+      248.14
+     </td>
+     <td>
+      246.03
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (1, 2) and scalar 2
+     </td>
+     <td>
+      16014.07
+     </td>
+     <td>
+      5109.74
+     </td>
+     <td>
+      2352.72
+     </td>
+     <td>
+      2063.93
+     </td>
+     <td>
+      1940.31
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point x = 1, y = 2 and scalar equal 2
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with 32-byte coordinates and scalar 2
+     </td>
+     <td>
+      16181.80
+     </td>
+     <td>
+      4967.11
+     </td>
+     <td>
+      2339.52
+     </td>
+     <td>
+      1658.40
+     </td>
+     <td>
+      1446.95
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x and y as 32-byte values and scalar equal 2
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with 32-byte coordinates and 32-byte scalar
+     </td>
+     <td>
+      15703.89
+     </td>
+     <td>
+      4762.64
+     </td>
+     <td>
+      2431.82
+     </td>
+     <td>
+      1896.43
+     </td>
+     <td>
+      1723.50
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x, y and scalar as 32-byte values
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (0, 0) and scalar 2
+     </td>
+     <td>
+      15692.39
+     </td>
+     <td>
+      5227.66
+     </td>
+     <td>
+      2447.84
+     </td>
+     <td>
+      1804.57
+     </td>
+     <td>
+      1461.50
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x = 0 and y = 0 and scalar equal 2
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (1, 2) and 32-byte scalar
+     </td>
+     <td>
+      15385.62
+     </td>
+     <td>
+      4705.67
+     </td>
+     <td>
+      2285.42
+     </td>
+     <td>
+      1780.44
+     </td>
+     <td>
+      1734.06
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point x = 1, y = 2 scalar as 32-byte values
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (0, 0) and 32-byte scalar
+     </td>
+     <td>
+      16154.42
+     </td>
+     <td>
+      4894.69
+     </td>
+     <td>
+      2499.30
+     </td>
+     <td>
+      2192.97
+     </td>
+     <td>
+      2084.04
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x = 0 and y = 0 and scalar as 32-byte values
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      GasLimit
+     </td>
+     <td>
+      704.63
+     </td>
+     <td>
+      613.13
+     </td>
+     <td>
+      477.42
+     </td>
+     <td>
+      418.90
+     </td>
+     <td>
+      410.74
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's gas limit to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      JumpDest
+     </td>
+     <td>
+      601.18
+     </td>
+     <td>
+      482.10
+     </td>
+     <td>
+      377.36
+     </td>
+     <td>
+      346.70
+     </td>
+     <td>
+      342.04
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Block full of JumpDest opcode only
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating zero value
+     </td>
+     <td>
+      1408.98
+     </td>
+     <td>
+      1159.92
+     </td>
+     <td>
+      313.16
+     </td>
+     <td>
+      255.18
+     </td>
+     <td>
+      250.50
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing zero in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - many accounts, consecutive storage keys, random values
+     </td>
+     <td>
+      20489.75
+     </td>
+     <td>
+      7970.01
+     </td>
+     <td>
+      1985.40
+     </td>
+     <td>
+      422.71
+     </td>
+     <td>
+      393.25
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - storing random 32-byte values in consecutive storage keys of many accounts
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating constant value
+     </td>
+     <td>
+      1342.02
+     </td>
+     <td>
+      1183.02
+     </td>
+     <td>
+      767.34
+     </td>
+     <td>
+      609.19
+     </td>
+     <td>
+      591.23
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing the same 32-byte word in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating two values, zero and non-zero
+     </td>
+     <td>
+      54682.21
+     </td>
+     <td>
+      7636.22
+     </td>
+     <td>
+      2412.14
+     </td>
+     <td>
+      1431.27
+     </td>
+     <td>
+      1362.42
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing zero and then storing 32-byte word in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - many accounts, random storage keys, random values
+     </td>
+     <td>
+      12727.59
+     </td>
+     <td>
+      6242.09
+     </td>
+     <td>
+      2261.60
+     </td>
+     <td>
+      1063.21
+     </td>
+     <td>
+      705.37
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - storing random 32-byte values in random storage keys of many accounts
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating random values
+     </td>
+     <td>
+      583.77
+     </td>
+     <td>
+      498.58
+     </td>
+     <td>
+      380.11
+     </td>
+     <td>
+      343.10
+     </td>
+     <td>
+      339.90
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing random 32-byte values in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      BlobHash
+     </td>
+     <td>
+      559.53
+     </td>
+     <td>
+      497.77
+     </td>
+     <td>
+      388.04
+     </td>
+     <td>
+      348.43
+     </td>
+     <td>
+      344.88
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zero as index and BlobHash opcode to stack when there were no blobs (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Address
+     </td>
+     <td>
+      643.33
+     </td>
+     <td>
+      556.29
+     </td>
+     <td>
+      428.33
+     </td>
+     <td>
+      378.50
+     </td>
+     <td>
+      378.32
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing account address to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Gas-Pop
+     </td>
+     <td>
+      642.98
+     </td>
+     <td>
+      575.85
+     </td>
+     <td>
+      430.14
+     </td>
+     <td>
+      377.92
+     </td>
+     <td>
+      370.75
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing amount of remaining gas to stack, then popping it
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Origin
+     </td>
+     <td>
+      649.58
+     </td>
+     <td>
+      571.06
+     </td>
+     <td>
+      441.02
+     </td>
+     <td>
+      379.67
+     </td>
+     <td>
+      374.87
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing execution origination address to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Caller-Pop
+     </td>
+     <td>
+      937.11
+     </td>
+     <td>
+      802.07
+     </td>
+     <td>
+      554.74
+     </td>
+     <td>
+      337.16
+     </td>
+     <td>
+      208.76
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing caller address to stack, then popping it
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      MSize
+     </td>
+     <td>
+      694.70
+     </td>
+     <td>
+      609.14
+     </td>
+     <td>
+      462.23
+     </td>
+     <td>
+      398.93
+     </td>
+     <td>
+      397.52
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing memory size to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Push0
+     </td>
+     <td>
+      738.00
+     </td>
+     <td>
+      644.56
+     </td>
+     <td>
+      471.59
+     </td>
+     <td>
+      417.01
+     </td>
+     <td>
+      414.96
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zeros to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      ETH transfers
+     </td>
+     <td>
+      1544.26
+     </td>
+     <td>
+      1362.10
+     </td>
+     <td>
+      1053.80
+     </td>
+     <td>
+      968.99
+     </td>
+     <td>
+      968.14
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      All block gas limit consumed by simple ETH transfers
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      ChainId
+     </td>
+     <td>
+      685.58
+     </td>
+     <td>
+      604.11
+     </td>
+     <td>
+      471.23
+     </td>
+     <td>
+      394.26
+     </td>
+     <td>
+      390.29
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing chain ID to stack (1000 per 1 contract)
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <h1>
+   Geth - ethereum/client-go:v1.16.1 - Benchmarking Report
+  </h1>
+  <table id="table_geth">
+   <thread>
+    <tr>
+     <th class="title" onclick="sortTable(0, 'table_geth', false)" style="cursor: pointer;">
+      Title ↑ ↓
+     </th>
+     <th onclick="sortTable(1, 'table_geth', true)" style="cursor: pointer;">
+      Max (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(2, 'table_geth', true)" style="cursor: pointer;">
+      p50 (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(3, 'table_geth', true)" style="cursor: pointer;">
+      p95 (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(4, 'table_geth', true)" style="cursor: pointer;">
+      p99 (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(5, 'table_geth', true)" style="cursor: pointer;">
+      Min (MGas/s) ↑ ↓
+     </th>
+     <th>
+      N
+     </th>
+     <th class="title">
+      Description
+     </th>
+    </tr>
+   </thread>
+   <tbody>
+    <tr>
+     <td class="title">
+      Keccak256 from 32 bytes
+     </td>
+     <td>
+      139.66
+     </td>
+     <td>
+      137.87
+     </td>
+     <td>
+      127.59
+     </td>
+     <td>
+      112.94
+     </td>
+     <td>
+      111.78
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Keccak calculations based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Keccak256 from 1 byte
+     </td>
+     <td>
+      140.41
+     </td>
+     <td>
+      136.56
+     </td>
+     <td>
+      123.64
+     </td>
+     <td>
+      113.37
+     </td>
+     <td>
+      112.67
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Keccak calculations based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Keccak256 from 8 bytes
+     </td>
+     <td>
+      140.02
+     </td>
+     <td>
+      136.11
+     </td>
+     <td>
+      126.11
+     </td>
+     <td>
+      121.85
+     </td>
+     <td>
+      121.58
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Keccak calculations based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Push0-Pop
+     </td>
+     <td>
+      241.55
+     </td>
+     <td>
+      233.63
+     </td>
+     <td>
+      211.36
+     </td>
+     <td>
+      201.50
+     </td>
+     <td>
+      201.20
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zeros to stack, then popping it
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      MStore - zero
+     </td>
+     <td>
+      190.33
+     </td>
+     <td>
+      185.91
+     </td>
+     <td>
+      170.35
+     </td>
+     <td>
+      159.44
+     </td>
+     <td>
+      159.04
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zero value to memory with offset zero
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      MStore - random
+     </td>
+     <td>
+      202.49
+     </td>
+     <td>
+      198.73
+     </td>
+     <td>
+      176.93
+     </td>
+     <td>
+      165.27
+     </td>
+     <td>
+      164.73
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing random value to memory with offset zero
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      PrevRandao
+     </td>
+     <td>
+      183.55
+     </td>
+     <td>
+      173.48
+     </td>
+     <td>
+      159.02
+     </td>
+     <td>
+      107.88
+     </td>
+     <td>
+      96.29
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing previous block's randao mix to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      CoinBase
+     </td>
+     <td>
+      193.20
+     </td>
+     <td>
+      181.26
+     </td>
+     <td>
+      165.40
+     </td>
+     <td>
+      136.47
+     </td>
+     <td>
+      133.57
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's coinbase to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Gas
+     </td>
+     <td>
+      211.53
+     </td>
+     <td>
+      201.42
+     </td>
+     <td>
+      176.61
+     </td>
+     <td>
+      145.70
+     </td>
+     <td>
+      144.94
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing amount of remaining gas to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Number
+     </td>
+     <td>
+      182.03
+     </td>
+     <td>
+      173.94
+     </td>
+     <td>
+      161.52
+     </td>
+     <td>
+      152.05
+     </td>
+     <td>
+      151.51
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's number to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Timestamp
+     </td>
+     <td>
+      210.59
+     </td>
+     <td>
+      201.13
+     </td>
+     <td>
+      180.64
+     </td>
+     <td>
+      155.96
+     </td>
+     <td>
+      152.45
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's timestamp to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Caller
+     </td>
+     <td>
+      148.80
+     </td>
+     <td>
+      142.88
+     </td>
+     <td>
+      129.42
+     </td>
+     <td>
+      124.21
+     </td>
+     <td>
+      123.51
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing caller address to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      CodeCopy
+     </td>
+     <td>
+      232.40
+     </td>
+     <td>
+      225.92
+     </td>
+     <td>
+      200.66
+     </td>
+     <td>
+      158.81
+     </td>
+     <td>
+      145.79
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly loading 32-bytes of code to the memory
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      BaseFee
+     </td>
+     <td>
+      182.34
+     </td>
+     <td>
+      174.08
+     </td>
+     <td>
+      160.23
+     </td>
+     <td>
+      142.81
+     </td>
+     <td>
+      141.93
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current base fee to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcRecover precompile
+     </td>
+     <td>
+      101.00
+     </td>
+     <td>
+      96.84
+     </td>
+     <td>
+      91.80
+     </td>
+     <td>
+      86.16
+     </td>
+     <td>
+      85.32
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      EcRecover precompile calculations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 1k rounds
+     </td>
+     <td>
+      140.29
+     </td>
+     <td>
+      135.20
+     </td>
+     <td>
+      125.13
+     </td>
+     <td>
+      129.93
+     </td>
+     <td>
+      124.35
+     </td>
+     <td>
+      64
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 1000 rounds of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 1 round
+     </td>
+     <td>
+      455.18
+     </td>
+     <td>
+      333.60
+     </td>
+     <td>
+      263.22
+     </td>
+     <td>
+      275.55
+     </td>
+     <td>
+      233.41
+     </td>
+     <td>
+      80
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 1 round of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 10M rounds
+     </td>
+     <td>
+      194.07
+     </td>
+     <td>
+      151.65
+     </td>
+     <td>
+      137.72
+     </td>
+     <td>
+      160.76
+     </td>
+     <td>
+      135.63
+     </td>
+     <td>
+      56
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 10_000_000 rounds of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 1M rounds
+     </td>
+     <td>
+      133.03
+     </td>
+     <td>
+      130.32
+     </td>
+     <td>
+      119.54
+     </td>
+     <td>
+      124.34
+     </td>
+     <td>
+      117.78
+     </td>
+     <td>
+      56
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 1_000_000 rounds of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 128 bytes
+     </td>
+     <td>
+      1208.53
+     </td>
+     <td>
+      1087.31
+     </td>
+     <td>
+      763.11
+     </td>
+     <td>
+      646.11
+     </td>
+     <td>
+      637.61
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 128-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      RipemdFrom16KBytes
+     </td>
+     <td>
+      1043.35
+     </td>
+     <td>
+      1008.67
+     </td>
+     <td>
+      742.32
+     </td>
+     <td>
+      614.06
+     </td>
+     <td>
+      593.04
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Description not found on metadata file
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 32 bytes
+     </td>
+     <td>
+      1462.35
+     </td>
+     <td>
+      1203.03
+     </td>
+     <td>
+      846.32
+     </td>
+     <td>
+      638.66
+     </td>
+     <td>
+      631.12
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 8 bytes
+     </td>
+     <td>
+      1356.35
+     </td>
+     <td>
+      1118.67
+     </td>
+     <td>
+      718.97
+     </td>
+     <td>
+      598.01
+     </td>
+     <td>
+      590.40
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 1 byte
+     </td>
+     <td>
+      1338.76
+     </td>
+     <td>
+      1073.58
+     </td>
+     <td>
+      791.40
+     </td>
+     <td>
+      607.14
+     </td>
+     <td>
+      580.69
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      RipemdFrom1024Bytes
+     </td>
+     <td>
+      1077.43
+     </td>
+     <td>
+      1026.33
+     </td>
+     <td>
+      680.84
+     </td>
+     <td>
+      548.21
+     </td>
+     <td>
+      537.50
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Description not found on metadata file
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 8 bytes
+     </td>
+     <td>
+      714.75
+     </td>
+     <td>
+      530.58
+     </td>
+     <td>
+      429.60
+     </td>
+     <td>
+      388.98
+     </td>
+     <td>
+      387.78
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 1 byte
+     </td>
+     <td>
+      723.06
+     </td>
+     <td>
+      530.73
+     </td>
+     <td>
+      397.71
+     </td>
+     <td>
+      326.65
+     </td>
+     <td>
+      326.16
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 32 bytes
+     </td>
+     <td>
+      736.97
+     </td>
+     <td>
+      549.39
+     </td>
+     <td>
+      423.62
+     </td>
+     <td>
+      337.71
+     </td>
+     <td>
+      321.20
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 128 bytes
+     </td>
+     <td>
+      736.83
+     </td>
+     <td>
+      566.85
+     </td>
+     <td>
+      448.94
+     </td>
+     <td>
+      339.42
+     </td>
+     <td>
+      327.67
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 128-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Point evaluation - one data
+     </td>
+     <td>
+      290.93
+     </td>
+     <td>
+      285.09
+     </td>
+     <td>
+      246.30
+     </td>
+     <td>
+      224.19
+     </td>
+     <td>
+      221.96
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      Point evaluation precompile repeating computations on the same data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 128 bytes
+     </td>
+     <td>
+      590.13
+     </td>
+     <td>
+      411.42
+     </td>
+     <td>
+      323.57
+     </td>
+     <td>
+      273.47
+     </td>
+     <td>
+      271.49
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 128-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 32 bytes
+     </td>
+     <td>
+      604.59
+     </td>
+     <td>
+      463.75
+     </td>
+     <td>
+      375.14
+     </td>
+     <td>
+      315.96
+     </td>
+     <td>
+      309.12
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 8 bytes
+     </td>
+     <td>
+      619.70
+     </td>
+     <td>
+      487.41
+     </td>
+     <td>
+      396.86
+     </td>
+     <td>
+      365.03
+     </td>
+     <td>
+      361.82
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 1 byte
+     </td>
+     <td>
+      665.11
+     </td>
+     <td>
+      491.60
+     </td>
+     <td>
+      382.84
+     </td>
+     <td>
+      296.52
+     </td>
+     <td>
+      287.07
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (1, 2) and scalar 2
+     </td>
+     <td>
+      105.57
+     </td>
+     <td>
+      102.00
+     </td>
+     <td>
+      97.67
+     </td>
+     <td>
+      94.46
+     </td>
+     <td>
+      93.48
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point x = 1, y = 2 and scalar equal 2
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with 32-byte coordinates and scalar 2
+     </td>
+     <td>
+      105.56
+     </td>
+     <td>
+      101.98
+     </td>
+     <td>
+      96.64
+     </td>
+     <td>
+      91.69
+     </td>
+     <td>
+      90.93
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x and y as 32-byte values and scalar equal 2
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with 32-byte coordinates and 32-byte scalar
+     </td>
+     <td>
+      97.95
+     </td>
+     <td>
+      94.71
+     </td>
+     <td>
+      87.86
+     </td>
+     <td>
+      81.52
+     </td>
+     <td>
+      81.04
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x, y and scalar as 32-byte values
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (0, 0) and scalar 2
+     </td>
+     <td>
+      254.01
+     </td>
+     <td>
+      241.08
+     </td>
+     <td>
+      210.91
+     </td>
+     <td>
+      184.04
+     </td>
+     <td>
+      178.36
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x = 0 and y = 0 and scalar equal 2
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (1, 2) and 32-byte scalar
+     </td>
+     <td>
+      98.35
+     </td>
+     <td>
+      94.40
+     </td>
+     <td>
+      90.38
+     </td>
+     <td>
+      84.60
+     </td>
+     <td>
+      83.46
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point x = 1, y = 2 scalar as 32-byte values
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (0, 0) and 32-byte scalar
+     </td>
+     <td>
+      247.06
+     </td>
+     <td>
+      231.92
+     </td>
+     <td>
+      208.36
+     </td>
+     <td>
+      199.27
+     </td>
+     <td>
+      197.62
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x = 0 and y = 0 and scalar as 32-byte values
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      GasLimit
+     </td>
+     <td>
+      212.84
+     </td>
+     <td>
+      204.83
+     </td>
+     <td>
+      182.28
+     </td>
+     <td>
+      171.01
+     </td>
+     <td>
+      169.96
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's gas limit to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      JumpDest
+     </td>
+     <td>
+      237.96
+     </td>
+     <td>
+      233.29
+     </td>
+     <td>
+      212.29
+     </td>
+     <td>
+      204.37
+     </td>
+     <td>
+      203.78
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Block full of JumpDest opcode only
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating zero value
+     </td>
+     <td>
+      554.24
+     </td>
+     <td>
+      539.06
+     </td>
+     <td>
+      435.40
+     </td>
+     <td>
+      404.37
+     </td>
+     <td>
+      399.33
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing zero in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - many accounts, consecutive storage keys, random values
+     </td>
+     <td>
+      7333.43
+     </td>
+     <td>
+      2662.15
+     </td>
+     <td>
+      1728.35
+     </td>
+     <td>
+      1540.87
+     </td>
+     <td>
+      1496.52
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - storing random 32-byte values in consecutive storage keys of many accounts
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating constant value
+     </td>
+     <td>
+      522.73
+     </td>
+     <td>
+      507.37
+     </td>
+     <td>
+      409.83
+     </td>
+     <td>
+      354.21
+     </td>
+     <td>
+      354.15
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing the same 32-byte word in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating two values, zero and non-zero
+     </td>
+     <td>
+      21527.35
+     </td>
+     <td>
+      7209.79
+     </td>
+     <td>
+      2360.98
+     </td>
+     <td>
+      2053.10
+     </td>
+     <td>
+      1926.33
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing zero and then storing 32-byte word in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - many accounts, random storage keys, random values
+     </td>
+     <td>
+      4212.00
+     </td>
+     <td>
+      2577.44
+     </td>
+     <td>
+      1468.84
+     </td>
+     <td>
+      1147.75
+     </td>
+     <td>
+      1069.53
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - storing random 32-byte values in random storage keys of many accounts
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating random values
+     </td>
+     <td>
+      243.01
+     </td>
+     <td>
+      177.60
+     </td>
+     <td>
+      154.06
+     </td>
+     <td>
+      135.59
+     </td>
+     <td>
+      134.93
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing random 32-byte values in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      BlobHash
+     </td>
+     <td>
+      267.86
+     </td>
+     <td>
+      260.73
+     </td>
+     <td>
+      231.13
+     </td>
+     <td>
+      214.24
+     </td>
+     <td>
+      211.19
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zero as index and BlobHash opcode to stack when there were no blobs (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Address
+     </td>
+     <td>
+      150.18
+     </td>
+     <td>
+      145.13
+     </td>
+     <td>
+      132.55
+     </td>
+     <td>
+      62.94
+     </td>
+     <td>
+      43.92
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing account address to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Gas-Pop
+     </td>
+     <td>
+      245.06
+     </td>
+     <td>
+      237.76
+     </td>
+     <td>
+      207.21
+     </td>
+     <td>
+      170.48
+     </td>
+     <td>
+      157.55
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing amount of remaining gas to stack, then popping it
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Origin
+     </td>
+     <td>
+      192.68
+     </td>
+     <td>
+      185.03
+     </td>
+     <td>
+      164.41
+     </td>
+     <td>
+      139.52
+     </td>
+     <td>
+      137.02
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing execution origination address to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Caller-Pop
+     </td>
+     <td>
+      218.76
+     </td>
+     <td>
+      211.49
+     </td>
+     <td>
+      193.20
+     </td>
+     <td>
+      130.31
+     </td>
+     <td>
+      86.82
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing caller address to stack, then popping it
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      MSize
+     </td>
+     <td>
+      211.30
+     </td>
+     <td>
+      204.55
+     </td>
+     <td>
+      186.50
+     </td>
+     <td>
+      145.46
+     </td>
+     <td>
+      135.70
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing memory size to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Push0
+     </td>
+     <td>
+      211.09
+     </td>
+     <td>
+      204.20
+     </td>
+     <td>
+      182.58
+     </td>
+     <td>
+      96.34
+     </td>
+     <td>
+      66.87
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zeros to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      ETH transfers
+     </td>
+     <td>
+      1227.04
+     </td>
+     <td>
+      1107.12
+     </td>
+     <td>
+      929.90
+     </td>
+     <td>
+      784.54
+     </td>
+     <td>
+      777.22
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      All block gas limit consumed by simple ETH transfers
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      ChainId
+     </td>
+     <td>
+      185.29
+     </td>
+     <td>
+      178.29
+     </td>
+     <td>
+      164.26
+     </td>
+     <td>
+      153.05
+     </td>
+     <td>
+      151.32
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing chain ID to stack (1000 per 1 contract)
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <h1>
+   Reth - ghcr.io/paradigmxyz/reth:v1.5.1 - Benchmarking Report
+  </h1>
+  <table id="table_reth">
+   <thread>
+    <tr>
+     <th class="title" onclick="sortTable(0, 'table_reth', false)" style="cursor: pointer;">
+      Title ↑ ↓
+     </th>
+     <th onclick="sortTable(1, 'table_reth', true)" style="cursor: pointer;">
+      Max (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(2, 'table_reth', true)" style="cursor: pointer;">
+      p50 (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(3, 'table_reth', true)" style="cursor: pointer;">
+      p95 (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(4, 'table_reth', true)" style="cursor: pointer;">
+      p99 (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(5, 'table_reth', true)" style="cursor: pointer;">
+      Min (MGas/s) ↑ ↓
+     </th>
+     <th>
+      N
+     </th>
+     <th class="title">
+      Description
+     </th>
+    </tr>
+   </thread>
+   <tbody>
+    <tr>
+     <td class="title">
+      Keccak256 from 32 bytes
+     </td>
+     <td>
+      189.95
+     </td>
+     <td>
+      187.33
+     </td>
+     <td>
+      176.56
+     </td>
+     <td>
+      156.49
+     </td>
+     <td>
+      152.75
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Keccak calculations based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Keccak256 from 1 byte
+     </td>
+     <td>
+      190.40
+     </td>
+     <td>
+      187.71
+     </td>
+     <td>
+      178.13
+     </td>
+     <td>
+      162.78
+     </td>
+     <td>
+      162.46
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Keccak calculations based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Keccak256 from 8 bytes
+     </td>
+     <td>
+      189.73
+     </td>
+     <td>
+      187.96
+     </td>
+     <td>
+      176.33
+     </td>
+     <td>
+      170.23
+     </td>
+     <td>
+      170.20
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Keccak calculations based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Push0-Pop
+     </td>
+     <td>
+      1126.62
+     </td>
+     <td>
+      1092.59
+     </td>
+     <td>
+      816.02
+     </td>
+     <td>
+      579.58
+     </td>
+     <td>
+      510.60
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zeros to stack, then popping it
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      MStore - zero
+     </td>
+     <td>
+      633.94
+     </td>
+     <td>
+      623.53
+     </td>
+     <td>
+      531.19
+     </td>
+     <td>
+      442.89
+     </td>
+     <td>
+      439.22
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zero value to memory with offset zero
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      MStore - random
+     </td>
+     <td>
+      604.62
+     </td>
+     <td>
+      595.80
+     </td>
+     <td>
+      500.13
+     </td>
+     <td>
+      462.61
+     </td>
+     <td>
+      456.45
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing random value to memory with offset zero
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      PrevRandao
+     </td>
+     <td>
+      652.37
+     </td>
+     <td>
+      637.54
+     </td>
+     <td>
+      534.01
+     </td>
+     <td>
+      469.19
+     </td>
+     <td>
+      461.14
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing previous block's randao mix to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      CoinBase
+     </td>
+     <td>
+      761.66
+     </td>
+     <td>
+      742.86
+     </td>
+     <td>
+      584.59
+     </td>
+     <td>
+      466.58
+     </td>
+     <td>
+      451.69
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's coinbase to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Gas
+     </td>
+     <td>
+      906.59
+     </td>
+     <td>
+      836.76
+     </td>
+     <td>
+      689.88
+     </td>
+     <td>
+      505.42
+     </td>
+     <td>
+      492.86
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing amount of remaining gas to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Number
+     </td>
+     <td>
+      882.17
+     </td>
+     <td>
+      859.55
+     </td>
+     <td>
+      636.55
+     </td>
+     <td>
+      248.10
+     </td>
+     <td>
+      174.03
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's number to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Timestamp
+     </td>
+     <td>
+      883.70
+     </td>
+     <td>
+      858.16
+     </td>
+     <td>
+      569.35
+     </td>
+     <td>
+      511.62
+     </td>
+     <td>
+      510.27
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's timestamp to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Caller
+     </td>
+     <td>
+      806.47
+     </td>
+     <td>
+      792.91
+     </td>
+     <td>
+      648.49
+     </td>
+     <td>
+      566.58
+     </td>
+     <td>
+      561.13
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing caller address to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      CodeCopy
+     </td>
+     <td>
+      685.56
+     </td>
+     <td>
+      672.37
+     </td>
+     <td>
+      519.75
+     </td>
+     <td>
+      404.25
+     </td>
+     <td>
+      389.89
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly loading 32-bytes of code to the memory
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      BaseFee
+     </td>
+     <td>
+      860.80
+     </td>
+     <td>
+      824.14
+     </td>
+     <td>
+      653.57
+     </td>
+     <td>
+      516.97
+     </td>
+     <td>
+      513.60
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current base fee to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcRecover precompile
+     </td>
+     <td>
+      11291.25
+     </td>
+     <td>
+      6673.39
+     </td>
+     <td>
+      2293.18
+     </td>
+     <td>
+      1478.00
+     </td>
+     <td>
+      1452.18
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      EcRecover precompile calculations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 1k rounds
+     </td>
+     <td>
+      3909.70
+     </td>
+     <td>
+      3298.62
+     </td>
+     <td>
+      1363.23
+     </td>
+     <td>
+      2114.44
+     </td>
+     <td>
+      1147.76
+     </td>
+     <td>
+      64
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 1000 rounds of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 1 round
+     </td>
+     <td>
+      439.91
+     </td>
+     <td>
+      431.84
+     </td>
+     <td>
+      330.38
+     </td>
+     <td>
+      340.49
+     </td>
+     <td>
+      317.17
+     </td>
+     <td>
+      80
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 1 round of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 10M rounds
+     </td>
+     <td>
+      7469.29
+     </td>
+     <td>
+      3800.91
+     </td>
+     <td>
+      548.64
+     </td>
+     <td>
+      3484.61
+     </td>
+     <td>
+      478.63
+     </td>
+     <td>
+      56
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 10_000_000 rounds of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 1M rounds
+     </td>
+     <td>
+      7361.47
+     </td>
+     <td>
+      3957.80
+     </td>
+     <td>
+      2085.73
+     </td>
+     <td>
+      4203.94
+     </td>
+     <td>
+      1821.94
+     </td>
+     <td>
+      56
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 1_000_000 rounds of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 128 bytes
+     </td>
+     <td>
+      1511.56
+     </td>
+     <td>
+      1378.47
+     </td>
+     <td>
+      969.02
+     </td>
+     <td>
+      793.79
+     </td>
+     <td>
+      745.39
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 128-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      RipemdFrom16KBytes
+     </td>
+     <td>
+      14970.03
+     </td>
+     <td>
+      1289.34
+     </td>
+     <td>
+      1061.97
+     </td>
+     <td>
+      909.51
+     </td>
+     <td>
+      876.87
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Description not found on metadata file
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 32 bytes
+     </td>
+     <td>
+      1688.34
+     </td>
+     <td>
+      1551.96
+     </td>
+     <td>
+      1076.52
+     </td>
+     <td>
+      840.38
+     </td>
+     <td>
+      791.06
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 8 bytes
+     </td>
+     <td>
+      3235.98
+     </td>
+     <td>
+      3023.64
+     </td>
+     <td>
+      1626.54
+     </td>
+     <td>
+      1152.20
+     </td>
+     <td>
+      1147.67
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 1 byte
+     </td>
+     <td>
+      3236.31
+     </td>
+     <td>
+      3013.83
+     </td>
+     <td>
+      1657.55
+     </td>
+     <td>
+      1148.18
+     </td>
+     <td>
+      1080.11
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      RipemdFrom1024Bytes
+     </td>
+     <td>
+      1467.33
+     </td>
+     <td>
+      1369.52
+     </td>
+     <td>
+      899.37
+     </td>
+     <td>
+      668.57
+     </td>
+     <td>
+      660.78
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Description not found on metadata file
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 8 bytes
+     </td>
+     <td>
+      527.61
+     </td>
+     <td>
+      501.84
+     </td>
+     <td>
+      441.35
+     </td>
+     <td>
+      357.09
+     </td>
+     <td>
+      346.47
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 1 byte
+     </td>
+     <td>
+      738.95
+     </td>
+     <td>
+      720.40
+     </td>
+     <td>
+      557.69
+     </td>
+     <td>
+      458.75
+     </td>
+     <td>
+      457.97
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 32 bytes
+     </td>
+     <td>
+      521.59
+     </td>
+     <td>
+      501.59
+     </td>
+     <td>
+      427.50
+     </td>
+     <td>
+      359.13
+     </td>
+     <td>
+      358.18
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 128 bytes
+     </td>
+     <td>
+      550.49
+     </td>
+     <td>
+      512.23
+     </td>
+     <td>
+      429.74
+     </td>
+     <td>
+      378.90
+     </td>
+     <td>
+      376.01
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 128-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Point evaluation - one data
+     </td>
+     <td>
+      31170.98
+     </td>
+     <td>
+      8248.46
+     </td>
+     <td>
+      2368.95
+     </td>
+     <td>
+      1876.14
+     </td>
+     <td>
+      1670.08
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      Point evaluation precompile repeating computations on the same data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 128 bytes
+     </td>
+     <td>
+      547.81
+     </td>
+     <td>
+      538.38
+     </td>
+     <td>
+      460.57
+     </td>
+     <td>
+      372.09
+     </td>
+     <td>
+      371.11
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 128-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 32 bytes
+     </td>
+     <td>
+      529.85
+     </td>
+     <td>
+      517.04
+     </td>
+     <td>
+      432.95
+     </td>
+     <td>
+      370.48
+     </td>
+     <td>
+      362.91
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 8 bytes
+     </td>
+     <td>
+      529.25
+     </td>
+     <td>
+      521.52
+     </td>
+     <td>
+      459.76
+     </td>
+     <td>
+      371.67
+     </td>
+     <td>
+      358.67
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 1 byte
+     </td>
+     <td>
+      536.07
+     </td>
+     <td>
+      528.92
+     </td>
+     <td>
+      426.51
+     </td>
+     <td>
+      352.90
+     </td>
+     <td>
+      346.30
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (1, 2) and scalar 2
+     </td>
+     <td>
+      22390.69
+     </td>
+     <td>
+      7765.58
+     </td>
+     <td>
+      2542.08
+     </td>
+     <td>
+      2309.15
+     </td>
+     <td>
+      2287.58
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point x = 1, y = 2 and scalar equal 2
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with 32-byte coordinates and scalar 2
+     </td>
+     <td>
+      22180.90
+     </td>
+     <td>
+      8495.68
+     </td>
+     <td>
+      2375.78
+     </td>
+     <td>
+      2240.90
+     </td>
+     <td>
+      2230.18
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x and y as 32-byte values and scalar equal 2
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with 32-byte coordinates and 32-byte scalar
+     </td>
+     <td>
+      21551.62
+     </td>
+     <td>
+      7305.41
+     </td>
+     <td>
+      2335.55
+     </td>
+     <td>
+      1929.07
+     </td>
+     <td>
+      1775.56
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x, y and scalar as 32-byte values
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (0, 0) and scalar 2
+     </td>
+     <td>
+      22315.28
+     </td>
+     <td>
+      7513.21
+     </td>
+     <td>
+      2350.81
+     </td>
+     <td>
+      1833.80
+     </td>
+     <td>
+      1423.78
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x = 0 and y = 0 and scalar equal 2
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (1, 2) and 32-byte scalar
+     </td>
+     <td>
+      21158.24
+     </td>
+     <td>
+      7184.62
+     </td>
+     <td>
+      2324.66
+     </td>
+     <td>
+      1511.05
+     </td>
+     <td>
+      1353.82
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point x = 1, y = 2 scalar as 32-byte values
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (0, 0) and 32-byte scalar
+     </td>
+     <td>
+      22351.17
+     </td>
+     <td>
+      7823.52
+     </td>
+     <td>
+      2413.44
+     </td>
+     <td>
+      1674.40
+     </td>
+     <td>
+      1444.40
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x = 0 and y = 0 and scalar as 32-byte values
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      GasLimit
+     </td>
+     <td>
+      874.04
+     </td>
+     <td>
+      814.46
+     </td>
+     <td>
+      649.49
+     </td>
+     <td>
+      577.80
+     </td>
+     <td>
+      567.33
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's gas limit to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      JumpDest
+     </td>
+     <td>
+      632.25
+     </td>
+     <td>
+      613.81
+     </td>
+     <td>
+      515.70
+     </td>
+     <td>
+      437.91
+     </td>
+     <td>
+      417.25
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Block full of JumpDest opcode only
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating zero value
+     </td>
+     <td>
+      1955.39
+     </td>
+     <td>
+      1854.55
+     </td>
+     <td>
+      1097.36
+     </td>
+     <td>
+      689.43
+     </td>
+     <td>
+      687.48
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing zero in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - many accounts, consecutive storage keys, random values
+     </td>
+     <td>
+      15002.85
+     </td>
+     <td>
+      8991.44
+     </td>
+     <td>
+      2377.35
+     </td>
+     <td>
+      1478.27
+     </td>
+     <td>
+      1443.98
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - storing random 32-byte values in consecutive storage keys of many accounts
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating constant value
+     </td>
+     <td>
+      1855.93
+     </td>
+     <td>
+      1761.59
+     </td>
+     <td>
+      1004.38
+     </td>
+     <td>
+      639.01
+     </td>
+     <td>
+      595.85
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing the same 32-byte word in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating two values, zero and non-zero
+     </td>
+     <td>
+      79331.65
+     </td>
+     <td>
+      9241.50
+     </td>
+     <td>
+      2348.05
+     </td>
+     <td>
+      1432.24
+     </td>
+     <td>
+      1431.34
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing zero and then storing 32-byte word in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - many accounts, random storage keys, random values
+     </td>
+     <td>
+      13605.22
+     </td>
+     <td>
+      8129.26
+     </td>
+     <td>
+      2356.98
+     </td>
+     <td>
+      1934.96
+     </td>
+     <td>
+      1911.56
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - storing random 32-byte values in random storage keys of many accounts
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating random values
+     </td>
+     <td>
+      682.68
+     </td>
+     <td>
+      563.63
+     </td>
+     <td>
+      465.02
+     </td>
+     <td>
+      404.88
+     </td>
+     <td>
+      395.52
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing random 32-byte values in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      BlobHash
+     </td>
+     <td>
+      922.41
+     </td>
+     <td>
+      898.32
+     </td>
+     <td>
+      650.75
+     </td>
+     <td>
+      539.59
+     </td>
+     <td>
+      519.26
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zero as index and BlobHash opcode to stack when there were no blobs (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Address
+     </td>
+     <td>
+      805.72
+     </td>
+     <td>
+      792.18
+     </td>
+     <td>
+      606.29
+     </td>
+     <td>
+      460.15
+     </td>
+     <td>
+      447.40
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing account address to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Gas-Pop
+     </td>
+     <td>
+      1141.78
+     </td>
+     <td>
+      1093.68
+     </td>
+     <td>
+      741.19
+     </td>
+     <td>
+      581.46
+     </td>
+     <td>
+      576.00
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing amount of remaining gas to stack, then popping it
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Origin
+     </td>
+     <td>
+      759.17
+     </td>
+     <td>
+      737.75
+     </td>
+     <td>
+      575.28
+     </td>
+     <td>
+      504.34
+     </td>
+     <td>
+      501.69
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing execution origination address to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Caller-Pop
+     </td>
+     <td>
+      1076.12
+     </td>
+     <td>
+      1025.81
+     </td>
+     <td>
+      796.50
+     </td>
+     <td>
+      564.20
+     </td>
+     <td>
+      535.97
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing caller address to stack, then popping it
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      MSize
+     </td>
+     <td>
+      836.59
+     </td>
+     <td>
+      818.48
+     </td>
+     <td>
+      599.26
+     </td>
+     <td>
+      483.95
+     </td>
+     <td>
+      483.01
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing memory size to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Push0
+     </td>
+     <td>
+      893.86
+     </td>
+     <td>
+      869.74
+     </td>
+     <td>
+      711.69
+     </td>
+     <td>
+      537.00
+     </td>
+     <td>
+      515.25
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zeros to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      ETH transfers
+     </td>
+     <td>
+      2070.86
+     </td>
+     <td>
+      1812.91
+     </td>
+     <td>
+      1461.39
+     </td>
+     <td>
+      1200.31
+     </td>
+     <td>
+      1194.27
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      All block gas limit consumed by simple ETH transfers
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      ChainId
+     </td>
+     <td>
+      851.24
+     </td>
+     <td>
+      821.45
+     </td>
+     <td>
+      683.20
+     </td>
+     <td>
+      545.50
+     </td>
+     <td>
+      530.51
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing chain ID to stack (1000 per 1 contract)
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <h1>
+   Erigon - erigontech/erigon:v3.0.14 - Benchmarking Report
+  </h1>
+  <table id="table_erigon">
+   <thread>
+    <tr>
+     <th class="title" onclick="sortTable(0, 'table_erigon', false)" style="cursor: pointer;">
+      Title ↑ ↓
+     </th>
+     <th onclick="sortTable(1, 'table_erigon', true)" style="cursor: pointer;">
+      Max (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(2, 'table_erigon', true)" style="cursor: pointer;">
+      p50 (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(3, 'table_erigon', true)" style="cursor: pointer;">
+      p95 (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(4, 'table_erigon', true)" style="cursor: pointer;">
+      p99 (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(5, 'table_erigon', true)" style="cursor: pointer;">
+      Min (MGas/s) ↑ ↓
+     </th>
+     <th>
+      N
+     </th>
+     <th class="title">
+      Description
+     </th>
+    </tr>
+   </thread>
+   <tbody>
+    <tr>
+     <td class="title">
+      Keccak256 from 32 bytes
+     </td>
+     <td>
+      121.57
+     </td>
+     <td>
+      115.60
+     </td>
+     <td>
+      101.63
+     </td>
+     <td>
+      92.97
+     </td>
+     <td>
+      92.41
+     </td>
+     <td>
+      112
+     </td>
+     <td style="text-align:left;">
+      Keccak calculations based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Keccak256 from 1 byte
+     </td>
+     <td>
+      121.12
+     </td>
+     <td>
+      115.95
+     </td>
+     <td>
+      98.33
+     </td>
+     <td>
+      92.30
+     </td>
+     <td>
+      91.44
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Keccak calculations based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Keccak256 from 8 bytes
+     </td>
+     <td>
+      120.97
+     </td>
+     <td>
+      115.37
+     </td>
+     <td>
+      100.73
+     </td>
+     <td>
+      94.33
+     </td>
+     <td>
+      94.02
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Keccak calculations based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Push0-Pop
+     </td>
+     <td>
+      206.39
+     </td>
+     <td>
+      188.58
+     </td>
+     <td>
+      154.95
+     </td>
+     <td>
+      133.21
+     </td>
+     <td>
+      132.93
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zeros to stack, then popping it
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      MStore - zero
+     </td>
+     <td>
+      102.53
+     </td>
+     <td>
+      97.71
+     </td>
+     <td>
+      82.92
+     </td>
+     <td>
+      81.22
+     </td>
+     <td>
+      81.08
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zero value to memory with offset zero
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      MStore - random
+     </td>
+     <td>
+      108.82
+     </td>
+     <td>
+      102.03
+     </td>
+     <td>
+      88.24
+     </td>
+     <td>
+      81.71
+     </td>
+     <td>
+      80.30
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing random value to memory with offset zero
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      PrevRandao
+     </td>
+     <td>
+      139.54
+     </td>
+     <td>
+      130.00
+     </td>
+     <td>
+      109.90
+     </td>
+     <td>
+      101.09
+     </td>
+     <td>
+      99.92
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing previous block's randao mix to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      CoinBase
+     </td>
+     <td>
+      137.28
+     </td>
+     <td>
+      130.27
+     </td>
+     <td>
+      105.99
+     </td>
+     <td>
+      101.14
+     </td>
+     <td>
+      101.07
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's coinbase to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Gas
+     </td>
+     <td>
+      180.71
+     </td>
+     <td>
+      162.73
+     </td>
+     <td>
+      134.39
+     </td>
+     <td>
+      123.89
+     </td>
+     <td>
+      123.75
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing amount of remaining gas to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Number
+     </td>
+     <td>
+      179.63
+     </td>
+     <td>
+      164.18
+     </td>
+     <td>
+      133.62
+     </td>
+     <td>
+      120.12
+     </td>
+     <td>
+      119.98
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's number to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Timestamp
+     </td>
+     <td>
+      178.21
+     </td>
+     <td>
+      165.39
+     </td>
+     <td>
+      128.28
+     </td>
+     <td>
+      122.03
+     </td>
+     <td>
+      121.36
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's timestamp to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Caller
+     </td>
+     <td>
+      124.16
+     </td>
+     <td>
+      116.37
+     </td>
+     <td>
+      95.20
+     </td>
+     <td>
+      91.92
+     </td>
+     <td>
+      91.90
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing caller address to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      CodeCopy
+     </td>
+     <td>
+      198.96
+     </td>
+     <td>
+      182.73
+     </td>
+     <td>
+      142.02
+     </td>
+     <td>
+      129.01
+     </td>
+     <td>
+      127.05
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly loading 32-bytes of code to the memory
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      BaseFee
+     </td>
+     <td>
+      182.45
+     </td>
+     <td>
+      169.50
+     </td>
+     <td>
+      127.84
+     </td>
+     <td>
+      124.15
+     </td>
+     <td>
+      123.64
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current base fee to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcRecover precompile
+     </td>
+     <td>
+      74.52
+     </td>
+     <td>
+      69.91
+     </td>
+     <td>
+      62.92
+     </td>
+     <td>
+      60.56
+     </td>
+     <td>
+      60.15
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      EcRecover precompile calculations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 1k rounds
+     </td>
+     <td>
+      128.24
+     </td>
+     <td>
+      118.22
+     </td>
+     <td>
+      100.08
+     </td>
+     <td>
+      107.66
+     </td>
+     <td>
+      96.58
+     </td>
+     <td>
+      64
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 1000 rounds of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 1 round
+     </td>
+     <td>
+      201.03
+     </td>
+     <td>
+      176.55
+     </td>
+     <td>
+      143.07
+     </td>
+     <td>
+      150.59
+     </td>
+     <td>
+      138.76
+     </td>
+     <td>
+      80
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 1 round of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 10M rounds
+     </td>
+     <td>
+      154.16
+     </td>
+     <td>
+      134.07
+     </td>
+     <td>
+      129.31
+     </td>
+     <td>
+      139.19
+     </td>
+     <td>
+      127.90
+     </td>
+     <td>
+      56
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 10_000_000 rounds of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 1M rounds
+     </td>
+     <td>
+      123.32
+     </td>
+     <td>
+      114.04
+     </td>
+     <td>
+      98.50
+     </td>
+     <td>
+      108.50
+     </td>
+     <td>
+      97.32
+     </td>
+     <td>
+      56
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 1_000_000 rounds of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 128 bytes
+     </td>
+     <td>
+      1009.91
+     </td>
+     <td>
+      663.26
+     </td>
+     <td>
+      339.70
+     </td>
+     <td>
+      278.84
+     </td>
+     <td>
+      256.13
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 128-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      RipemdFrom16KBytes
+     </td>
+     <td>
+      988.84
+     </td>
+     <td>
+      656.80
+     </td>
+     <td>
+      341.61
+     </td>
+     <td>
+      239.36
+     </td>
+     <td>
+      196.96
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Description not found on metadata file
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 32 bytes
+     </td>
+     <td>
+      1098.19
+     </td>
+     <td>
+      687.46
+     </td>
+     <td>
+      323.95
+     </td>
+     <td>
+      235.93
+     </td>
+     <td>
+      232.21
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 8 bytes
+     </td>
+     <td>
+      1037.70
+     </td>
+     <td>
+      679.03
+     </td>
+     <td>
+      319.71
+     </td>
+     <td>
+      260.21
+     </td>
+     <td>
+      236.31
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 1 byte
+     </td>
+     <td>
+      968.90
+     </td>
+     <td>
+      665.28
+     </td>
+     <td>
+      338.65
+     </td>
+     <td>
+      274.87
+     </td>
+     <td>
+      271.53
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      RipemdFrom1024Bytes
+     </td>
+     <td>
+      997.36
+     </td>
+     <td>
+      670.52
+     </td>
+     <td>
+      318.31
+     </td>
+     <td>
+      237.56
+     </td>
+     <td>
+      205.45
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Description not found on metadata file
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 8 bytes
+     </td>
+     <td>
+      324.82
+     </td>
+     <td>
+      282.21
+     </td>
+     <td>
+      205.61
+     </td>
+     <td>
+      178.49
+     </td>
+     <td>
+      178.26
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 1 byte
+     </td>
+     <td>
+      330.57
+     </td>
+     <td>
+      276.43
+     </td>
+     <td>
+      184.00
+     </td>
+     <td>
+      173.10
+     </td>
+     <td>
+      172.63
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 32 bytes
+     </td>
+     <td>
+      317.35
+     </td>
+     <td>
+      278.07
+     </td>
+     <td>
+      192.57
+     </td>
+     <td>
+      179.25
+     </td>
+     <td>
+      178.73
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 128 bytes
+     </td>
+     <td>
+      360.35
+     </td>
+     <td>
+      298.18
+     </td>
+     <td>
+      219.50
+     </td>
+     <td>
+      181.29
+     </td>
+     <td>
+      180.24
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 128-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Point evaluation - one data
+     </td>
+     <td>
+      284.09
+     </td>
+     <td>
+      243.01
+     </td>
+     <td>
+      184.43
+     </td>
+     <td>
+      155.37
+     </td>
+     <td>
+      154.83
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      Point evaluation precompile repeating computations on the same data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 128 bytes
+     </td>
+     <td>
+      285.37
+     </td>
+     <td>
+      241.71
+     </td>
+     <td>
+      182.89
+     </td>
+     <td>
+      156.03
+     </td>
+     <td>
+      155.35
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 128-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 32 bytes
+     </td>
+     <td>
+      278.98
+     </td>
+     <td>
+      238.70
+     </td>
+     <td>
+      175.05
+     </td>
+     <td>
+      148.16
+     </td>
+     <td>
+      146.26
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 8 bytes
+     </td>
+     <td>
+      287.43
+     </td>
+     <td>
+      245.70
+     </td>
+     <td>
+      184.16
+     </td>
+     <td>
+      167.72
+     </td>
+     <td>
+      166.88
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 1 byte
+     </td>
+     <td>
+      278.09
+     </td>
+     <td>
+      243.68
+     </td>
+     <td>
+      173.95
+     </td>
+     <td>
+      160.55
+     </td>
+     <td>
+      159.02
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (1, 2) and scalar 2
+     </td>
+     <td>
+      104.29
+     </td>
+     <td>
+      97.33
+     </td>
+     <td>
+      84.18
+     </td>
+     <td>
+      81.24
+     </td>
+     <td>
+      79.56
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point x = 1, y = 2 and scalar equal 2
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with 32-byte coordinates and scalar 2
+     </td>
+     <td>
+      103.58
+     </td>
+     <td>
+      97.88
+     </td>
+     <td>
+      85.73
+     </td>
+     <td>
+      81.07
+     </td>
+     <td>
+      80.81
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x and y as 32-byte values and scalar equal 2
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with 32-byte coordinates and 32-byte scalar
+     </td>
+     <td>
+      95.95
+     </td>
+     <td>
+      90.91
+     </td>
+     <td>
+      79.77
+     </td>
+     <td>
+      74.95
+     </td>
+     <td>
+      74.70
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x, y and scalar as 32-byte values
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (0, 0) and scalar 2
+     </td>
+     <td>
+      244.71
+     </td>
+     <td>
+      215.72
+     </td>
+     <td>
+      168.15
+     </td>
+     <td>
+      150.79
+     </td>
+     <td>
+      149.50
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x = 0 and y = 0 and scalar equal 2
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (1, 2) and 32-byte scalar
+     </td>
+     <td>
+      96.11
+     </td>
+     <td>
+      90.61
+     </td>
+     <td>
+      79.94
+     </td>
+     <td>
+      74.58
+     </td>
+     <td>
+      74.49
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point x = 1, y = 2 scalar as 32-byte values
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (0, 0) and 32-byte scalar
+     </td>
+     <td>
+      239.54
+     </td>
+     <td>
+      209.78
+     </td>
+     <td>
+      161.51
+     </td>
+     <td>
+      141.03
+     </td>
+     <td>
+      139.71
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x = 0 and y = 0 and scalar as 32-byte values
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      GasLimit
+     </td>
+     <td>
+      176.51
+     </td>
+     <td>
+      163.15
+     </td>
+     <td>
+      133.06
+     </td>
+     <td>
+      109.21
+     </td>
+     <td>
+      107.83
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's gas limit to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      JumpDest
+     </td>
+     <td>
+      147.79
+     </td>
+     <td>
+      135.81
+     </td>
+     <td>
+      113.39
+     </td>
+     <td>
+      103.61
+     </td>
+     <td>
+      103.52
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Block full of JumpDest opcode only
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating zero value
+     </td>
+     <td>
+      434.60
+     </td>
+     <td>
+      373.32
+     </td>
+     <td>
+      261.63
+     </td>
+     <td>
+      221.90
+     </td>
+     <td>
+      220.73
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing zero in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - many accounts, consecutive storage keys, random values
+     </td>
+     <td>
+      5262.76
+     </td>
+     <td>
+      2088.61
+     </td>
+     <td>
+      618.63
+     </td>
+     <td>
+      427.71
+     </td>
+     <td>
+      398.45
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - storing random 32-byte values in consecutive storage keys of many accounts
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating constant value
+     </td>
+     <td>
+      435.25
+     </td>
+     <td>
+      375.08
+     </td>
+     <td>
+      263.11
+     </td>
+     <td>
+      205.22
+     </td>
+     <td>
+      203.97
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing the same 32-byte word in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating two values, zero and non-zero
+     </td>
+     <td>
+      14283.45
+     </td>
+     <td>
+      2918.23
+     </td>
+     <td>
+      1001.87
+     </td>
+     <td>
+      524.79
+     </td>
+     <td>
+      498.81
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing zero and then storing 32-byte word in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - many accounts, random storage keys, random values
+     </td>
+     <td>
+      3452.42
+     </td>
+     <td>
+      1718.16
+     </td>
+     <td>
+      596.01
+     </td>
+     <td>
+      477.66
+     </td>
+     <td>
+      450.22
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - storing random 32-byte values in random storage keys of many accounts
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating random values
+     </td>
+     <td>
+      206.04
+     </td>
+     <td>
+      187.75
+     </td>
+     <td>
+      157.66
+     </td>
+     <td>
+      139.72
+     </td>
+     <td>
+      139.57
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing random 32-byte values in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      BlobHash
+     </td>
+     <td>
+      230.38
+     </td>
+     <td>
+      213.50
+     </td>
+     <td>
+      158.83
+     </td>
+     <td>
+      151.09
+     </td>
+     <td>
+      150.47
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zero as index and BlobHash opcode to stack when there were no blobs (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Address
+     </td>
+     <td>
+      125.92
+     </td>
+     <td>
+      117.12
+     </td>
+     <td>
+      101.35
+     </td>
+     <td>
+      94.74
+     </td>
+     <td>
+      94.59
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing account address to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Gas-Pop
+     </td>
+     <td>
+      203.82
+     </td>
+     <td>
+      181.25
+     </td>
+     <td>
+      145.10
+     </td>
+     <td>
+      125.94
+     </td>
+     <td>
+      125.32
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing amount of remaining gas to stack, then popping it
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Origin
+     </td>
+     <td>
+      140.05
+     </td>
+     <td>
+      129.78
+     </td>
+     <td>
+      109.34
+     </td>
+     <td>
+      101.99
+     </td>
+     <td>
+      101.76
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing execution origination address to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Caller-Pop
+     </td>
+     <td>
+      175.57
+     </td>
+     <td>
+      159.30
+     </td>
+     <td>
+      125.92
+     </td>
+     <td>
+      109.32
+     </td>
+     <td>
+      103.62
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing caller address to stack, then popping it
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      MSize
+     </td>
+     <td>
+      176.34
+     </td>
+     <td>
+      161.72
+     </td>
+     <td>
+      131.35
+     </td>
+     <td>
+      122.88
+     </td>
+     <td>
+      122.76
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing memory size to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Push0
+     </td>
+     <td>
+      179.16
+     </td>
+     <td>
+      165.30
+     </td>
+     <td>
+      132.72
+     </td>
+     <td>
+      112.97
+     </td>
+     <td>
+      108.68
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zeros to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      ETH transfers
+     </td>
+     <td>
+      307.94
+     </td>
+     <td>
+      248.50
+     </td>
+     <td>
+      55.50
+     </td>
+     <td>
+      51.70
+     </td>
+     <td>
+      51.69
+     </td>
+     <td>
+      104
+     </td>
+     <td style="text-align:left;">
+      All block gas limit consumed by simple ETH transfers
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      ChainId
+     </td>
+     <td>
+      143.93
+     </td>
+     <td>
+      136.66
+     </td>
+     <td>
+      116.01
+     </td>
+     <td>
+      110.89
+     </td>
+     <td>
+      110.73
+     </td>
+     <td>
+      104
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing chain ID to stack (1000 per 1 contract)
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <h1>
+   Besu - hyperledger/besu:25.7.0 - Benchmarking Report
+  </h1>
+  <table id="table_besu">
+   <thread>
+    <tr>
+     <th class="title" onclick="sortTable(0, 'table_besu', false)" style="cursor: pointer;">
+      Title ↑ ↓
+     </th>
+     <th onclick="sortTable(1, 'table_besu', true)" style="cursor: pointer;">
+      Max (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(2, 'table_besu', true)" style="cursor: pointer;">
+      p50 (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(3, 'table_besu', true)" style="cursor: pointer;">
+      p95 (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(4, 'table_besu', true)" style="cursor: pointer;">
+      p99 (MGas/s) ↑ ↓
+     </th>
+     <th onclick="sortTable(5, 'table_besu', true)" style="cursor: pointer;">
+      Min (MGas/s) ↑ ↓
+     </th>
+     <th>
+      N
+     </th>
+     <th class="title">
+      Description
+     </th>
+    </tr>
+   </thread>
+   <tbody>
+    <tr>
+     <td class="title">
+      Keccak256 from 32 bytes
+     </td>
+     <td>
+      87.29
+     </td>
+     <td>
+      82.39
+     </td>
+     <td>
+      76.34
+     </td>
+     <td>
+      74.23
+     </td>
+     <td>
+      74.17
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Keccak calculations based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Keccak256 from 1 byte
+     </td>
+     <td>
+      88.22
+     </td>
+     <td>
+      83.54
+     </td>
+     <td>
+      81.37
+     </td>
+     <td>
+      78.08
+     </td>
+     <td>
+      77.61
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Keccak calculations based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Keccak256 from 8 bytes
+     </td>
+     <td>
+      87.09
+     </td>
+     <td>
+      83.15
+     </td>
+     <td>
+      79.71
+     </td>
+     <td>
+      70.02
+     </td>
+     <td>
+      68.46
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Keccak calculations based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Push0-Pop
+     </td>
+     <td>
+      235.29
+     </td>
+     <td>
+      177.17
+     </td>
+     <td>
+      172.80
+     </td>
+     <td>
+      145.45
+     </td>
+     <td>
+      135.71
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zeros to stack, then popping it
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      MStore - zero
+     </td>
+     <td>
+      96.22
+     </td>
+     <td>
+      94.23
+     </td>
+     <td>
+      88.96
+     </td>
+     <td>
+      86.33
+     </td>
+     <td>
+      86.32
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zero value to memory with offset zero
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      MStore - random
+     </td>
+     <td>
+      110.91
+     </td>
+     <td>
+      109.46
+     </td>
+     <td>
+      105.81
+     </td>
+     <td>
+      100.25
+     </td>
+     <td>
+      99.55
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing random value to memory with offset zero
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      PrevRandao
+     </td>
+     <td>
+      121.57
+     </td>
+     <td>
+      118.41
+     </td>
+     <td>
+      108.67
+     </td>
+     <td>
+      101.22
+     </td>
+     <td>
+      100.90
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing previous block's randao mix to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      CoinBase
+     </td>
+     <td>
+      121.91
+     </td>
+     <td>
+      119.14
+     </td>
+     <td>
+      115.80
+     </td>
+     <td>
+      114.29
+     </td>
+     <td>
+      113.98
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's coinbase to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Gas
+     </td>
+     <td>
+      94.52
+     </td>
+     <td>
+      92.42
+     </td>
+     <td>
+      90.40
+     </td>
+     <td>
+      86.90
+     </td>
+     <td>
+      86.67
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing amount of remaining gas to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Number
+     </td>
+     <td>
+      99.86
+     </td>
+     <td>
+      98.29
+     </td>
+     <td>
+      95.52
+     </td>
+     <td>
+      94.99
+     </td>
+     <td>
+      94.91
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's number to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Timestamp
+     </td>
+     <td>
+      100.50
+     </td>
+     <td>
+      98.60
+     </td>
+     <td>
+      95.12
+     </td>
+     <td>
+      90.60
+     </td>
+     <td>
+      89.86
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's timestamp to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Caller
+     </td>
+     <td>
+      122.79
+     </td>
+     <td>
+      119.50
+     </td>
+     <td>
+      115.11
+     </td>
+     <td>
+      109.10
+     </td>
+     <td>
+      108.72
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing caller address to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      CodeCopy
+     </td>
+     <td>
+      134.60
+     </td>
+     <td>
+      131.84
+     </td>
+     <td>
+      120.43
+     </td>
+     <td>
+      116.25
+     </td>
+     <td>
+      116.02
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly loading 32-bytes of code to the memory
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      BaseFee
+     </td>
+     <td>
+      112.48
+     </td>
+     <td>
+      111.24
+     </td>
+     <td>
+      105.97
+     </td>
+     <td>
+      97.60
+     </td>
+     <td>
+      97.23
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current base fee to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcRecover precompile
+     </td>
+     <td>
+      88.45
+     </td>
+     <td>
+      83.54
+     </td>
+     <td>
+      79.21
+     </td>
+     <td>
+      75.04
+     </td>
+     <td>
+      74.29
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      EcRecover precompile calculations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 1k rounds
+     </td>
+     <td>
+      100.26
+     </td>
+     <td>
+      99.24
+     </td>
+     <td>
+      94.39
+     </td>
+     <td>
+      95.26
+     </td>
+     <td>
+      92.57
+     </td>
+     <td>
+      64
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 1000 rounds of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 1 round
+     </td>
+     <td>
+      75.16
+     </td>
+     <td>
+      73.15
+     </td>
+     <td>
+      69.51
+     </td>
+     <td>
+      64.09
+     </td>
+     <td>
+      61.50
+     </td>
+     <td>
+      80
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 1 round of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 10M rounds
+     </td>
+     <td>
+      155.25
+     </td>
+     <td>
+      124.76
+     </td>
+     <td>
+      116.83
+     </td>
+     <td>
+      133.30
+     </td>
+     <td>
+      116.75
+     </td>
+     <td>
+      56
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 10_000_000 rounds of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Blake2f 1M rounds
+     </td>
+     <td>
+      108.55
+     </td>
+     <td>
+      105.80
+     </td>
+     <td>
+      103.17
+     </td>
+     <td>
+      105.12
+     </td>
+     <td>
+      102.54
+     </td>
+     <td>
+      56
+     </td>
+     <td style="text-align:left;">
+      Blake2f precompile with 1_000_000 rounds of computations
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 128 bytes
+     </td>
+     <td>
+      421.70
+     </td>
+     <td>
+      412.19
+     </td>
+     <td>
+      389.01
+     </td>
+     <td>
+      349.25
+     </td>
+     <td>
+      348.00
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 128-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      RipemdFrom16KBytes
+     </td>
+     <td>
+      476.89
+     </td>
+     <td>
+      469.18
+     </td>
+     <td>
+      452.16
+     </td>
+     <td>
+      424.05
+     </td>
+     <td>
+      417.83
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Description not found on metadata file
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 32 bytes
+     </td>
+     <td>
+      452.82
+     </td>
+     <td>
+      440.08
+     </td>
+     <td>
+      396.61
+     </td>
+     <td>
+      343.23
+     </td>
+     <td>
+      342.20
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 8 bytes
+     </td>
+     <td>
+      460.48
+     </td>
+     <td>
+      446.00
+     </td>
+     <td>
+      391.68
+     </td>
+     <td>
+      333.77
+     </td>
+     <td>
+      320.12
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Ripemd-160 precompile from 1 byte
+     </td>
+     <td>
+      460.94
+     </td>
+     <td>
+      449.29
+     </td>
+     <td>
+      420.47
+     </td>
+     <td>
+      341.56
+     </td>
+     <td>
+      319.95
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Ripemd-160 precompile calculations based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      RipemdFrom1024Bytes
+     </td>
+     <td>
+      460.73
+     </td>
+     <td>
+      454.44
+     </td>
+     <td>
+      432.29
+     </td>
+     <td>
+      374.64
+     </td>
+     <td>
+      342.97
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      Description not found on metadata file
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 8 bytes
+     </td>
+     <td>
+      122.04
+     </td>
+     <td>
+      118.69
+     </td>
+     <td>
+      113.98
+     </td>
+     <td>
+      111.66
+     </td>
+     <td>
+      111.27
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 1 byte
+     </td>
+     <td>
+      124.17
+     </td>
+     <td>
+      119.18
+     </td>
+     <td>
+      115.63
+     </td>
+     <td>
+      112.00
+     </td>
+     <td>
+      111.50
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 32 bytes
+     </td>
+     <td>
+      121.68
+     </td>
+     <td>
+      117.53
+     </td>
+     <td>
+      114.29
+     </td>
+     <td>
+      110.71
+     </td>
+     <td>
+      110.00
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SHA-2 precompile from 128 bytes
+     </td>
+     <td>
+      103.79
+     </td>
+     <td>
+      101.51
+     </td>
+     <td>
+      98.40
+     </td>
+     <td>
+      96.60
+     </td>
+     <td>
+      96.37
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      SHA-2 precompile calculations based on 128-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Point evaluation - one data
+     </td>
+     <td>
+      85.45
+     </td>
+     <td>
+      84.22
+     </td>
+     <td>
+      83.50
+     </td>
+     <td>
+      82.78
+     </td>
+     <td>
+      82.70
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      Point evaluation precompile repeating computations on the same data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 128 bytes
+     </td>
+     <td>
+      120.98
+     </td>
+     <td>
+      118.20
+     </td>
+     <td>
+      113.26
+     </td>
+     <td>
+      108.60
+     </td>
+     <td>
+      107.94
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 128-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 32 bytes
+     </td>
+     <td>
+      114.59
+     </td>
+     <td>
+      111.81
+     </td>
+     <td>
+      107.42
+     </td>
+     <td>
+      102.06
+     </td>
+     <td>
+      101.56
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 32-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 8 bytes
+     </td>
+     <td>
+      114.00
+     </td>
+     <td>
+      111.23
+     </td>
+     <td>
+      107.26
+     </td>
+     <td>
+      101.29
+     </td>
+     <td>
+      100.60
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 8-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Identity precompile from 1 byte
+     </td>
+     <td>
+      114.17
+     </td>
+     <td>
+      111.43
+     </td>
+     <td>
+      106.26
+     </td>
+     <td>
+      102.59
+     </td>
+     <td>
+      101.97
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Identity precompile call based on 1-byte source data
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (1, 2) and scalar 2
+     </td>
+     <td>
+      1593.06
+     </td>
+     <td>
+      1429.82
+     </td>
+     <td>
+      677.74
+     </td>
+     <td>
+      369.08
+     </td>
+     <td>
+      274.07
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point x = 1, y = 2 and scalar equal 2
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with 32-byte coordinates and scalar 2
+     </td>
+     <td>
+      1598.82
+     </td>
+     <td>
+      1431.88
+     </td>
+     <td>
+      707.47
+     </td>
+     <td>
+      425.29
+     </td>
+     <td>
+      201.07
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x and y as 32-byte values and scalar equal 2
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with 32-byte coordinates and 32-byte scalar
+     </td>
+     <td>
+      155.44
+     </td>
+     <td>
+      151.76
+     </td>
+     <td>
+      136.71
+     </td>
+     <td>
+      116.40
+     </td>
+     <td>
+      109.20
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x, y and scalar as 32-byte values
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (0, 0) and scalar 2
+     </td>
+     <td>
+      3949.03
+     </td>
+     <td>
+      3547.48
+     </td>
+     <td>
+      1418.96
+     </td>
+     <td>
+      700.11
+     </td>
+     <td>
+      670.17
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x = 0 and y = 0 and scalar equal 2
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (1, 2) and 32-byte scalar
+     </td>
+     <td>
+      154.26
+     </td>
+     <td>
+      151.61
+     </td>
+     <td>
+      137.27
+     </td>
+     <td>
+      116.06
+     </td>
+     <td>
+      115.46
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point x = 1, y = 2 scalar as 32-byte values
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      EcMul with (0, 0) and 32-byte scalar
+     </td>
+     <td>
+      3933.86
+     </td>
+     <td>
+      3588.40
+     </td>
+     <td>
+      1395.81
+     </td>
+     <td>
+      429.98
+     </td>
+     <td>
+      362.56
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      EcMul precompile with initial point with x = 0 and y = 0 and scalar as 32-byte values
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      GasLimit
+     </td>
+     <td>
+      101.07
+     </td>
+     <td>
+      98.81
+     </td>
+     <td>
+      93.38
+     </td>
+     <td>
+      90.39
+     </td>
+     <td>
+      90.02
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing current block's gas limit to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      JumpDest
+     </td>
+     <td>
+      174.10
+     </td>
+     <td>
+      169.38
+     </td>
+     <td>
+      163.60
+     </td>
+     <td>
+      126.37
+     </td>
+     <td>
+      100.96
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Block full of JumpDest opcode only
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating zero value
+     </td>
+     <td>
+      345.80
+     </td>
+     <td>
+      256.34
+     </td>
+     <td>
+      192.46
+     </td>
+     <td>
+      163.69
+     </td>
+     <td>
+      158.03
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing zero in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - many accounts, consecutive storage keys, random values
+     </td>
+     <td>
+      10536.99
+     </td>
+     <td>
+      1664.49
+     </td>
+     <td>
+      905.35
+     </td>
+     <td>
+      731.67
+     </td>
+     <td>
+      701.13
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - storing random 32-byte values in consecutive storage keys of many accounts
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating constant value
+     </td>
+     <td>
+      350.37
+     </td>
+     <td>
+      266.64
+     </td>
+     <td>
+      204.60
+     </td>
+     <td>
+      170.75
+     </td>
+     <td>
+      167.18
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing the same 32-byte word in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating two values, zero and non-zero
+     </td>
+     <td>
+      25704.56
+     </td>
+     <td>
+      8758.79
+     </td>
+     <td>
+      2357.01
+     </td>
+     <td>
+      1938.01
+     </td>
+     <td>
+      1739.65
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing zero and then storing 32-byte word in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - many accounts, random storage keys, random values
+     </td>
+     <td>
+      6848.03
+     </td>
+     <td>
+      3131.27
+     </td>
+     <td>
+      1650.28
+     </td>
+     <td>
+      755.87
+     </td>
+     <td>
+      588.25
+     </td>
+     <td>
+      152
+     </td>
+     <td style="text-align:left;">
+      SStore - storing random 32-byte values in random storage keys of many accounts
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      SStore - one storage key, repeating random values
+     </td>
+     <td>
+      294.14
+     </td>
+     <td>
+      231.69
+     </td>
+     <td>
+      172.23
+     </td>
+     <td>
+      142.94
+     </td>
+     <td>
+      141.11
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      SStore - repeating storing random 32-byte values in single storage key of single account
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      BlobHash
+     </td>
+     <td>
+      153.86
+     </td>
+     <td>
+      136.71
+     </td>
+     <td>
+      111.10
+     </td>
+     <td>
+      104.58
+     </td>
+     <td>
+      103.89
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zero as index and BlobHash opcode to stack when there were no blobs (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Address
+     </td>
+     <td>
+      123.36
+     </td>
+     <td>
+      117.22
+     </td>
+     <td>
+      94.78
+     </td>
+     <td>
+      89.27
+     </td>
+     <td>
+      88.62
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing account address to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Gas-Pop
+     </td>
+     <td>
+      124.86
+     </td>
+     <td>
+      120.63
+     </td>
+     <td>
+      115.74
+     </td>
+     <td>
+      112.70
+     </td>
+     <td>
+      111.91
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing amount of remaining gas to stack, then popping it
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Origin
+     </td>
+     <td>
+      121.54
+     </td>
+     <td>
+      118.58
+     </td>
+     <td>
+      113.61
+     </td>
+     <td>
+      106.91
+     </td>
+     <td>
+      106.65
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing execution origination address to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Caller-Pop
+     </td>
+     <td>
+      151.98
+     </td>
+     <td>
+      146.44
+     </td>
+     <td>
+      140.95
+     </td>
+     <td>
+      134.19
+     </td>
+     <td>
+      134.19
+     </td>
+     <td>
+      144
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing caller address to stack, then popping it
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      MSize
+     </td>
+     <td>
+      95.25
+     </td>
+     <td>
+      93.77
+     </td>
+     <td>
+      88.03
+     </td>
+     <td>
+      85.41
+     </td>
+     <td>
+      85.17
+     </td>
+     <td>
+      120
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing memory size to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      Push0
+     </td>
+     <td>
+      126.94
+     </td>
+     <td>
+      116.06
+     </td>
+     <td>
+      112.60
+     </td>
+     <td>
+      108.97
+     </td>
+     <td>
+      108.20
+     </td>
+     <td>
+      136
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing zeros to stack (1000 per 1 contract)
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      ETH transfers
+     </td>
+     <td>
+      1207.98
+     </td>
+     <td>
+      1085.21
+     </td>
+     <td>
+      387.35
+     </td>
+     <td>
+      368.37
+     </td>
+     <td>
+      365.30
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      All block gas limit consumed by simple ETH transfers
+     </td>
+    </tr>
+    <tr>
+     <td class="title">
+      ChainId
+     </td>
+     <td>
+      123.51
+     </td>
+     <td>
+      119.22
+     </td>
+     <td>
+      106.69
+     </td>
+     <td>
+      98.91
+     </td>
+     <td>
+      97.48
+     </td>
+     <td>
+      128
+     </td>
+     <td style="text-align:left;">
+      Endlessly pushing chain ID to stack (1000 per 1 contract)
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <script>
+   function sortTable(n, table_name, nm) {  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;  table = document.getElementById(table_name);  switching = true;  dir = "asc";  while (switching) {    switching = false;    rows = table.rows;    for (i = 1; i < (rows.length - 1); i++) {      shouldSwitch = false;      x = rows[i].getElementsByTagName("TD")[n];      y = rows[i + 1].getElementsByTagName("TD")[n];      if (dir == "asc") {        if (nm) {          if (Number(x.innerHTML) > Number(y.innerHTML)) {            shouldSwitch = true;            break;          }        } else {          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {            shouldSwitch = true;            break;          }        }      } else if (dir == "desc") {        if (nm) {          if (Number(x.innerHTML) < Number(y.innerHTML)) {            shouldSwitch = true;            break;          }        } else {          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {            shouldSwitch = true;            break;          }        }      }    }    if (shouldSwitch) {      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);      switching = true;      switchcount ++;    } else {      if (switchcount == 0 && dir == "asc") {        dir = "desc";        switching = true;      }    }  }}
+  </script>
+ </body>
+</html>
