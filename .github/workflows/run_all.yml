@@ -12,9 +12,9 @@ on:
         required: false
         default: ""
       clients:
-        description: "Enter clients to use (e.g., [nethermind,geth,reth,erigon,besu])"
+        description: "Enter clients to use (e.g., [nethermind,geth,reth,erigon,besu,ethrex])"
         required: true
-        default: "[nethermind,geth,reth,erigon,besu]"
+        default: "[nethermind,geth,reth,erigon,besu,ethrex]"
       sizes:
         description: "Enter sizes (e.g., [1000])"
         required: false
@@ -32,7 +32,7 @@ jobs:
     env:
       ROOT_DIR: ${{ github.event.inputs.root_dir || '/root/benchmarks/' }}
       DATE: ${{ github.event.inputs.date || '' }}
-      CLIENTS: ${{ github.event.inputs.clients || '["nethermind","geth","reth","erigon","besu"]' }}
+      CLIENTS: ${{ github.event.inputs.clients || '["nethermind","geth","reth","erigon","besu","ethrex"]' }}
       SIZES: ${{ github.event.inputs.sizes || '[1000]' }}
       REPETITIONS: ${{ github.event.inputs.repetitions || 8 }}
     outputs:
@@ -286,7 +286,7 @@ jobs:
       - name: Run burntpix benchmarks
         run: |
           # Use const due to can't handle ${{ needs.run-genesis-init-memory-benchmarks.outputs.clients }}
-          CLIENT="nethermind,geth,reth,erigon,besu"
+          CLIENT="nethermind,geth,reth,erigon,besu,ethrex"
           REPETITIONS=${{ needs.run-genesis-init-memory-benchmarks.outputs.repetitions }}
           ROOT_DIR=${{ needs.run-genesis-init-memory-benchmarks.outputs.root_dir }}
           DATE=${{ needs.run-genesis-init-memory-benchmarks.outputs.date }}
